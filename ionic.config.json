@@ -1,0 +1,13 @@
+{
+  "name": "ProyectoEjemplo",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular",
+
+  "proxies" : [
+    {
+      "path": "/api",
+      "proxyUrl": "https://apiesteban.000webhostapp.com/api"
+    }]
+}
