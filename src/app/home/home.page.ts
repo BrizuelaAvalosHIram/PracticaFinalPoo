@@ -29,8 +29,9 @@ export class HomePage {
     };
   usuario=""
   contrasena=""
-  MenuPrincipal  = false;
-  ClientesModal=false;
+  MenuPrincipal  = true;
+  ClientesModal = false;
+  ProductosModal = false;
   agregarClientesModal=false;
   editarClientesModal=false;
 
@@ -70,13 +71,21 @@ export class HomePage {
   setOpen(isOpen: boolean) {
     this.MenuPrincipal = isOpen;
   }
-cerrarClientes()
-{
-  this.ClientesModal=false;
-}
+  cerrarClientes()
+  {
+    this.ClientesModal=false;
+  }
+  cerrarProductos()
+  {
+    this.ProductosModal=false;
+  }
   clientesModal()
   {
     this.ClientesModal=true;
+  }
+  productosModal()
+  {
+    this.ProductosModal=true;
   }
   AgregarClientesModal()
   {

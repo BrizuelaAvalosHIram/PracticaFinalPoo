@@ -102,7 +102,7 @@
           </ion-col>
           <ion-col>
 
-            <ion-card color="secondary">
+            <ion-card color="secondary" (click)="productosModal()">
               <img alt="Productos" src="https://stollermexico.com/wp-content/uploads/2021/11/productos.png" />
               <ion-card-header>
                 <ion-card-title>Productos</ion-card-title>
@@ -144,6 +144,54 @@
       </ion-content>
     </ng-template>
   </ion-modal>
+
+  <ion-modal [isOpen]="ProductosModal">
+    <ng-template>
+      <ion-header>
+        <div style="padding: 5px;">
+          <ion-row>
+
+            <ion-button mode="ios" color="medium" (click)="cerrarProductos()">
+              <ion-icon name="chevron-back-outline"></ion-icon>
+            </ion-button>
+            <ion-avatar>
+              <img alt="Productos" src="https://stollermexico.com/wp-content/uploads/2021/11/productos.png" />
+            </ion-avatar>
+            <h1 style="padding: 5px;color:white;">Productos</h1>
+
+          </ion-row>
+        </div>
+      </ion-header>
+      <ion-content mode="ios">
+        <ion-fab slot="fixed" vertical="top" horizontal="end" [edge]="true">
+          <ion-fab-button (click)="AgregarClientesModal()">
+            <ion-icon name="add"></ion-icon>
+          </ion-fab-button>
+        </ion-fab>
+
+        <ion-row>
+          <ion-card color="light" *ngFor="let cliente of filteredCliente;" (click)="editarCliente(cliente)">
+            <img src="{{cliente.fotografia}}" alt="fotografia">
+            <ion-card-title>{{cliente.nombre}}</ion-card-title>
+            <ion-card-subtitle>{{cliente.domicilio}}</ion-card-subtitle>
+            <ion-card-content>
+              <p><b>Correo </b>{{cliente.correo}}</p>
+              <p><b>Teléfono </b>{{cliente.telefono}}</p>
+              <p><b>Correo </b>{{cliente.correo}}</p>
+              <p><b>El periodo para cobrar es </b>{{cliente.periodocobrar}}</p>
+              <p><b>El día </b>{{cliente.diacobrar}}</p>
+              <p><b>A la hora </b>{{cliente.horacobrar}}</p>
+              <p>{{cliente.id}}</p>
+            </ion-card-content>
+          </ion-card>
+
+        </ion-row>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
+
+
 
   <ion-modal [isOpen]="ClientesModal">
     <ng-template>
