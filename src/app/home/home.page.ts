@@ -32,7 +32,8 @@ export class HomePage {
   MenuPrincipal  = true;
   ClientesModal = false;
   ProductosModal = false;
-  agregarClientesModal=false;
+  agregarClientesModal = false;
+  agregarProductosModal=false;
   editarClientesModal=false;
 
   username: string="";
@@ -90,6 +91,10 @@ export class HomePage {
   AgregarClientesModal()
   {
     this.agregarClientesModal=true;
+  }
+  AgregarProductosModal()
+  {
+    this.agregarProductosModal=true;
   }
 
   guardarClientes()
@@ -165,6 +170,9 @@ export class HomePage {
 
   CancelarAgregarClientesModal(){
     this.agregarClientesModal=false;
+  }
+  CancelarAgregarProductosModal(){
+    this.agregarProductosModal=false;
   }
 
   CancelarActualizarClientesModal(){

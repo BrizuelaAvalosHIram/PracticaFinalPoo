@@ -164,7 +164,7 @@
       </ion-header>
       <ion-content mode="ios">
         <ion-fab slot="fixed" vertical="top" horizontal="end" [edge]="true">
-          <ion-fab-button (click)="AgregarClientesModal()">
+          <ion-fab-button (click)="AgregarProductosModal()">
             <ion-icon name="add"></ion-icon>
           </ion-fab-button>
         </ion-fab>
@@ -239,11 +239,71 @@
     </ng-template>
   </ion-modal>
 
-  <ion-modal [isOpen]="agregarClientesModal">
+  <ion-modal [isOpen]="agregarProductosModal">
     <ng-template>
       <ion-header mode="ios">
         <ion-title style="color: white;">
           Agregar producto
+        </ion-title>
+      </ion-header>
+      <ion-content>
+        <ion-list>
+          <ion-item>
+            <ion-input label="Nombre" [(ngModel)]="registro.nombre" labelPlacement="stacked" [clearInput]="true"
+              placeholder="Teclea el nombre del cliente" value="">
+            </ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-textarea label="Domicilio" [(ngModel)]="registro.domicilio" labelPlacement="stacked"
+              placeholder="Teclea el domicilio del cliente" value="">
+            </ion-textarea>
+          </ion-item>
+          <ion-item>
+            <ion-input label="Correo" [(ngModel)]="registro.correo" labelPlacement="stacked" [clearInput]="true"
+              placeholder="Teclea el correo del cliente" value="">
+            </ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input label="Teléfono" [(ngModel)]="registro.telefono" labelPlacement="stacked" [clearInput]="true"
+              placeholder="Teclea el télefono del cliente" value="">
+            </ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-textarea label="Fotografía" [(ngModel)]="registro.fotografia" labelPlacement="stacked"
+              placeholder="Teclea la URL de la fotografía del cliente" value="">
+            </ion-textarea>
+          </ion-item>
+          <ion-item>
+            <ion-input label="Periódo en que se cobraran los abonos" [(ngModel)]="registro.periodocobrar"
+              labelPlacement="stacked" [clearInput]="true" placeholder="Semanal, quincenal o mensual" value="">
+            </ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input label="Día" [(ngModel)]="registro.diacobrar" labelPlacement="stacked" [clearInput]="true"
+              placeholder="Que día quieres que se pase a cobrar" value="">
+            </ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input label="Hora en la que te encuentras" [(ngModel)]="registro.horacobrar" labelPlacement="stacked"
+              [clearInput]="true" placeholder="En que hora se encuentra para cobrarle" value="">
+            </ion-input>
+          </ion-item>
+        </ion-list>
+      </ion-content>
+      <ion-footer class="ion-no-border">
+        <ion-toolbar color="medium" mode="ios" style="text-align: center;">
+          <ion-button color="success" (click)="guardarClientes()">Guardar</ion-button>
+          <ion-button color="dark" (click)="CancelarAgregarProductosModal()">Cancelar</ion-button>
+        </ion-toolbar>
+      </ion-footer>
+    </ng-template>
+  </ion-modal>
+
+  <ion-modal [isOpen]="agregarClientesModal">
+    <ng-template>
+      <ion-header mode="ios">
+        <ion-title style="color: white;">
+          Agregar cliente
         </ion-title>
       </ion-header>
       <ion-content>
