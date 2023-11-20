@@ -1,4 +1,4 @@
-<ion-header  mode="ios" class="ion-no-border" >
+<ion-header mode="ios" class="ion-no-border">
   <div class="authentication-header">
     <h1>Autenticación</h1>
   </div>
@@ -17,130 +17,131 @@
       </ion-item>
 
       <ion-item>
-        <ion-input type="password" [(ngModel)]="pass" placeholder="Contraseña">
+        <ion-input type="password" [(ngModel)]="contrasena" placeholder="Contraseña">
         </ion-input>
       </ion-item>
-     
-        <ion-button expand="block" color="tertiary" (click)="login()">Iniciar sesión</ion-button>
+
+      <ion-button expand="block" color="tertiary" (click)="login()">Iniciar sesión</ion-button>
       <ion-button expand="block" color="tertiary" id="open-modal-agregar">registrate</ion-button>
       <div style="text-align: center;">
         Tiendas registradas {{usuarios.length}}
-    </div>
-    
-    </ion-card-content>
-   
-  </ion-card>
-  <ion-modal  trigger="open-modal-agregar">
-    <ng-template>
-    <ion-header mode="ios" class="ion-no-border">
-      <ion-toolbar color="tertiary">
-        <ion-title>Registro</ion-title>
-      </ion-toolbar>
-    </ion-header>
- 
-    <ion-content>
-      <ion-item>
-        <ion-input type="text" [(ngModel)]="nombre" placeholder="Nombre">
-        </ion-input>
-      </ion-item>
- 
-      <ion-item>
-        <ion-input type="text" [(ngModel)]="usuario" placeholder="Nombre de usuario">
-        </ion-input>
-      </ion-item>
- 
-      <ion-item>
-        <ion-input type="text" [(ngModel)]="correo" placeholder="Correo">
-        </ion-input>
-      </ion-item>
+      </div>
 
-      <ion-item>
-        <ion-input type="password" [(ngModel)]="pass" placeholder="Contraseña">
-        </ion-input>
-      </ion-item>
- 
-      <ion-item>
-        <ion-input type="text" [(ngModel)]="nombre_tienda" placeholder="Nombre de la tienda">
-        </ion-input>
-      </ion-item>
- 
-      <ion-item>
-        <ion-input type="text" [(ngModel)]="imageUrl" placeholder="URL de la imagen">
-        </ion-input>
-      </ion-item>
-      <div style="text-align: center;">
-      <ion-button color="success" (click)="guardarUsuario()">Registrarse</ion-button>
-      <ion-button color="tertiary" (click)="cancel()">Cacelar</ion-button>
-    </div>
-    </ion-content>
-  </ng-template>
+
+    </ion-card-content>
+
+  </ion-card>
+  <ion-modal trigger="open-modal-agregar">
+    <ng-template>
+      <ion-header mode="ios" class="ion-no-border">
+        <ion-toolbar color="tertiary">
+          <ion-title>Registro</ion-title>
+        </ion-toolbar>
+      </ion-header>
+
+      <ion-content>
+        <ion-item>
+          <ion-input type="text" [(ngModel)]="name" placeholder="Nombre">
+          </ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-input type="text" [(ngModel)]="username" placeholder="Nombre de usuario">
+          </ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-input type="password" [(ngModel)]="password" placeholder="Contraseña">
+          </ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-input type="text" [(ngModel)]="storeName" placeholder="Nombre de la tienda">
+          </ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-input type="text" [(ngModel)]="imageUrl" placeholder="URL de la imagen">
+          </ion-input>
+        </ion-item>
+        <div style="text-align: center;">
+          <ion-button color="success" (click)="guardarusuario()">Registrarse</ion-button>
+          <ion-button color="tertiary" (click)="cancel()">Cacelar</ion-button>
+        </div>
+      </ion-content>
+    </ng-template>
   </ion-modal>
 
-  <ion-modal  [isOpen]="MenuPrincipal">
+  <ion-modal [isOpen]="MenuPrincipal">
     <ng-template>
       <ion-header>
-      <div style="padding: 5px;">
-        <ion-row>
-        <ion-avatar>
-          <img alt="Usuario" src="{{elemento.fotografia}}" />
-        </ion-avatar>
-        <h1 style="padding: 5px;color:white;">{{elemento.tienda}}</h1>
-      </ion-row>
-      </div>
-    </ion-header>
-  <ion-content>
-    <ion-row>
-      <ion-col>    
-        <ion-card color="primary" (click)="clientesModal()" >
-      <img alt="Clientes" src="https://images.vexels.com/media/users/3/205237/isolated/preview/ed7b0a564fc695b0b91c4ac1276c661d-icono-de-trazo-de-servicio-al-cliente.png" />
-      <ion-card-header>
-        <ion-card-title>Clientes</ion-card-title>
-        <!--ion-card-subtitle>Quienes te compran</ion-card-subtitle-->
-      </ion-card-header>
-   
-      <!--ion-card-content> Agrega, edita, y elimina clientes </ion-card-content-->
-    </ion-card>
-  </ion-col>
-<ion-col>
+        <div style="padding: 5px;">
+          <ion-row>
 
-    <ion-card color="secondary" class="productos-card" (click)="abrirProductosModal()">
-      <img alt="Productos" src="https://stollermexico.com/wp-content/uploads/2021/11/productos.png" />
-      <ion-card-header>
-        <ion-card-title>Productos</ion-card-title>
-        <!--ion-card-subtitle>Lo que vendes</ion-card-subtitle-->
-      </ion-card-header>
-   
-      <!--ion-card-content> Card Content </ion-card-content-->
-    </ion-card>
-  </ion-col>
-  </ion-row>
-  <ion-row>
-    <ion-col>
-    <ion-card color="tertiary" class="ventas-card" (click)="abrirVentasModal()">
-      <img alt="Vender" src="https://static.semrush.com/blog/uploads/media/81/69/81699c8c370f16072b6655fc74dfb27c/top-5-actionable-ideas-for-upselling-your-agency-clients.svg" />
-     
-      <ion-card-header>
-        <ion-card-title>Vender</ion-card-title>
-        <!--ion-card-subtitle>Card Subtitle</ion-card-subtitle-->
-      </ion-card-header>
-   
-      <!--ion-card-content> Card Content </ion-card-content-->
-    </ion-card>
-  </ion-col>
-  <ion-col>
-    <ion-card color="light">
-      <img alt="Reportes"  width="80%" src="https://www.merida.gob.mx/municipio/portal/assets/img/elements/gaceta.svg" />
-     
-      <ion-card-header>
-        <ion-card-title>Reportes</ion-card-title>
-        <!--ion-card-subtitle>Card Subtitle</ion-card-subtitle-->
-      </ion-card-header>
-   
-      <!--ion-card-content> Card Content </ion-card-content-->
-    </ion-card>
-  </ion-col>
-  </ion-row>
-  </ion-content>
+            <ion-avatar>
+              <img alt="Usuario" src="{{elemento.fotografia}}" />
+            </ion-avatar>
+            <h1 style="padding: 5px;color:white;">{{elemento.tienda}}</h1>
+
+          </ion-row>
+        </div>
+      </ion-header>
+      <ion-content>
+        <ion-row>
+          <ion-col>
+            <ion-card color="primary" (click)="clientesModal()">
+              <img alt="Clientes"
+                src="https://images.vexels.com/media/users/3/205237/isolated/preview/ed7b0a564fc695b0b91c4ac1276c661d-icono-de-trazo-de-servicio-al-cliente.png" />
+              <ion-card-header>
+                <ion-card-title>Clientes</ion-card-title>
+                <!--ion-card-subtitle>Quienes te compran</ion-card-subtitle-->
+              </ion-card-header>
+
+              <!--ion-card-content> Agrega, edita, y elimina clientes </ion-card-content-->
+            </ion-card>
+          </ion-col>
+          <ion-col>
+
+            <ion-card color="secondary">
+              <img alt="Productos" src="https://stollermexico.com/wp-content/uploads/2021/11/productos.png" />
+              <ion-card-header>
+                <ion-card-title>Productos</ion-card-title>
+                <!--ion-card-subtitle>Lo que vendes</ion-card-subtitle-->
+              </ion-card-header>
+
+              <!--ion-card-content> Card Content </ion-card-content-->
+            </ion-card>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-card color="tertiary">
+              <img alt="Vender"
+                src="https://static.semrush.com/blog/uploads/media/81/69/81699c8c370f16072b6655fc74dfb27c/top-5-actionable-ideas-for-upselling-your-agency-clients.svg" />
+
+              <ion-card-header>
+                <ion-card-title>Vender</ion-card-title>
+                <!--ion-card-subtitle>Card Subtitle</ion-card-subtitle-->
+              </ion-card-header>
+
+              <!--ion-card-content> Card Content </ion-card-content-->
+            </ion-card>
+          </ion-col>
+          <ion-col>
+            <ion-card color="light">
+              <img alt="Reportes" width="80%"
+                src="https://www.merida.gob.mx/municipio/portal/assets/img/elements/gaceta.svg" />
+
+              <ion-card-header>
+                <ion-card-title>Reportes</ion-card-title>
+                <!--ion-card-subtitle>Card Subtitle</ion-card-subtitle-->
+              </ion-card-header>
+
+              <!--ion-card-content> Card Content </ion-card-content-->
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </ion-content>
     </ng-template>
   </ion-modal>
 
@@ -149,16 +150,17 @@
       <ion-header>
         <div style="padding: 5px;">
           <ion-row>
-     
+
             <ion-button mode="ios" color="medium" (click)="cerrarClientes()">
               <ion-icon name="chevron-back-outline"></ion-icon>
-            </ion-button>  
-          <ion-avatar>
-            <img alt="Usuario" src="https://images.vexels.com/media/users/3/205237/isolated/preview/ed7b0a564fc695b0b91c4ac1276c661d-icono-de-trazo-de-servicio-al-cliente.png" />
-          </ion-avatar>
-          <h1 style="padding: 5px;color:white;">Clientes</h1>
-       
-        </ion-row>
+            </ion-button>
+            <ion-avatar>
+              <img alt="Usuario"
+                src="https://images.vexels.com/media/users/3/205237/isolated/preview/ed7b0a564fc695b0b91c4ac1276c661d-icono-de-trazo-de-servicio-al-cliente.png" />
+            </ion-avatar>
+            <h1 style="padding: 5px;color:white;">Clientes</h1>
+
+          </ion-row>
         </div>
       </ion-header>
       <ion-content mode="ios">
@@ -169,22 +171,22 @@
         </ion-fab>
 
         <ion-row>
-        <ion-card  color="light" *ngFor="let cliente of filteredCliente;" (click)="editarCliente(cliente)">
-        <img src="{{cliente.fotografia}}" alt="fotografia">
-        <ion-card-title>{{cliente.nombre}}</ion-card-title>
-        <ion-card-subtitle>{{cliente.domicilio}}</ion-card-subtitle>
-        <ion-card-content>
-         <p><b>Correo </b>{{cliente.correo}}</p>
-         <p><b>Teléfono </b>{{cliente.telefono}}</p>
-         <p><b>Correo </b>{{cliente.correo}}</p>
-         <p><b>El periodo para cobrar es </b>{{cliente.periodocobrar}}</p>
-         <p><b>El día </b>{{cliente.diacobrar}}</p>
-         <p><b>A la hora  </b>{{cliente.horacobrar}}</p>
-         <p>{{cliente.id}}</p>
-        </ion-card-content>
-        </ion-card>
-     
-      </ion-row>
+          <ion-card color="light" *ngFor="let cliente of filteredCliente;" (click)="editarCliente(cliente)">
+            <img src="{{cliente.fotografia}}" alt="fotografia">
+            <ion-card-title>{{cliente.nombre}}</ion-card-title>
+            <ion-card-subtitle>{{cliente.domicilio}}</ion-card-subtitle>
+            <ion-card-content>
+              <p><b>Correo </b>{{cliente.correo}}</p>
+              <p><b>Teléfono </b>{{cliente.telefono}}</p>
+              <p><b>Correo </b>{{cliente.correo}}</p>
+              <p><b>El periodo para cobrar es </b>{{cliente.periodocobrar}}</p>
+              <p><b>El día </b>{{cliente.diacobrar}}</p>
+              <p><b>A la hora </b>{{cliente.horacobrar}}</p>
+              <p>{{cliente.id}}</p>
+            </ion-card-content>
+          </ion-card>
+
+        </ion-row>
       </ion-content>
     </ng-template>
   </ion-modal>
@@ -193,97 +195,51 @@
     <ng-template>
       <ion-header mode="ios">
         <ion-title style="color: white;">
-          Agregar cliente
+          Agregar producto
         </ion-title>
       </ion-header>
       <ion-content>
         <ion-list>
-        <ion-item>
-          <ion-input
-            label="Nombre"
-            [(ngModel)]="registro.nombre"
-            labelPlacement="stacked"
-            [clearInput]="true"
-            placeholder="Teclea el nombre del cliente"
-            value=""
-          >
-          </ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-textarea
-            label="Domicilio"
-            [(ngModel)]="registro.domicilio"
-            labelPlacement="stacked"
-            placeholder="Teclea el domicilio del cliente"
-            value=""
-          >
-          </ion-textarea>
-        </ion-item>
-        <ion-item>
-          <ion-input
-            label="Correo"
-            [(ngModel)]="registro.correo"
-            labelPlacement="stacked"
-            [clearInput]="true"
-            placeholder="Teclea el correo del cliente"
-            value=""
-          >
-          </ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-input
-            label="Teléfono"
-            [(ngModel)]="registro.telefono"
-            labelPlacement="stacked"
-            [clearInput]="true"
-            placeholder="Teclea el télefono del cliente"
-            value=""
-          >
-          </ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-textarea
-            label="Fotografía"
-            [(ngModel)]="registro.fotografia"
-            labelPlacement="stacked"
-            placeholder="Teclea la URL de la fotografía del cliente"
-            value=""
-          >
-          </ion-textarea>
-        </ion-item>
-        <ion-item>
-          <ion-input
-            label="Periódo en que se cobraran los abonos"
-            [(ngModel)]="registro.periodocobrar"
-            labelPlacement="stacked"
-            [clearInput]="true"
-            placeholder="Semanal, quincenal o mensual"
-            value=""
-          >
-          </ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-input
-            label="Día"
-            [(ngModel)]="registro.diacobrar"
-            labelPlacement="stacked"
-            [clearInput]="true"
-            placeholder="Que día quieres que se pase a cobrar"
-            value=""
-          >
-          </ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-input
-            label="Hora en la que te encuentras"
-            [(ngModel)]="registro.horacobrar"
-            labelPlacement="stacked"
-            [clearInput]="true"
-            placeholder="En que hora se encuentra para cobrarle"
-            value=""
-          >
-          </ion-input>
-        </ion-item>
+          <ion-item>
+            <ion-input label="Nombre" [(ngModel)]="registro.nombre" labelPlacement="stacked" [clearInput]="true"
+              placeholder="Teclea el nombre del cliente" value="">
+            </ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-textarea label="Domicilio" [(ngModel)]="registro.domicilio" labelPlacement="stacked"
+              placeholder="Teclea el domicilio del cliente" value="">
+            </ion-textarea>
+          </ion-item>
+          <ion-item>
+            <ion-input label="Correo" [(ngModel)]="registro.correo" labelPlacement="stacked" [clearInput]="true"
+              placeholder="Teclea el correo del cliente" value="">
+            </ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input label="Teléfono" [(ngModel)]="registro.telefono" labelPlacement="stacked" [clearInput]="true"
+              placeholder="Teclea el télefono del cliente" value="">
+            </ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-textarea label="Fotografía" [(ngModel)]="registro.fotografia" labelPlacement="stacked"
+              placeholder="Teclea la URL de la fotografía del cliente" value="">
+            </ion-textarea>
+          </ion-item>
+          <ion-item>
+            <ion-input label="Periódo en que se cobraran los abonos" [(ngModel)]="registro.periodocobrar"
+              labelPlacement="stacked" [clearInput]="true" placeholder="Semanal, quincenal o mensual" value="">
+            </ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input label="Día" [(ngModel)]="registro.diacobrar" labelPlacement="stacked" [clearInput]="true"
+              placeholder="Que día quieres que se pase a cobrar" value="">
+            </ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input label="Hora en la que te encuentras" [(ngModel)]="registro.horacobrar" labelPlacement="stacked"
+              [clearInput]="true" placeholder="En que hora se encuentra para cobrarle" value="">
+            </ion-input>
+          </ion-item>
         </ion-list>
       </ion-content>
       <ion-footer class="ion-no-border">
@@ -292,103 +248,58 @@
           <ion-button color="dark" (click)="CancelarAgregarClientesModal()">Cancelar</ion-button>
         </ion-toolbar>
       </ion-footer>
-    </ng-template>  
+    </ng-template>
   </ion-modal>
 
   <ion-modal [isOpen]="editarClientesModal">
     <ng-template>
       <ion-header mode="ios">
         <ion-title style="color: white;">
-          Editar cliente
+          Editar producto
         </ion-title>
       </ion-header>
       <ion-content>
         <ion-list>
-        <ion-item>
-          <ion-input
-            label="Nombre"
-            [(ngModel)]="eregistro.nombre"
-            labelPlacement="stacked"
-            [clearInput]="true"
-            placeholder="Teclea el nombre del cliente"
-            value=""
-          >
-          </ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-textarea
-            label="Domicilio"
-            [(ngModel)]="eregistro.domicilio"
-            labelPlacement="stacked"
-            placeholder="Teclea el domicilio del cliente"
-            value=""
-          >
-          </ion-textarea>
-        </ion-item>
-        <ion-item>
-          <ion-input
-            label="Correo"
-            [(ngModel)]="eregistro.correo"
-            labelPlacement="stacked"
-            [clearInput]="true"
-            placeholder="Teclea el correo del cliente"
-            value=""
-          >
-          </ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-input
-            label="Teléfono"
-            [(ngModel)]="eregistro.telefono"
-            labelPlacement="stacked"
-            [clearInput]="true"
-            placeholder="Teclea el télefono del cliente"
-            value=""
-          >
-          </ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-textarea
-            label="Fotografía"
-            [(ngModel)]="eregistro.fotografia"
-            labelPlacement="stacked"
-            placeholder="Teclea la URL de la fotografía del cliente"
-            value=""
-          >
-          </ion-textarea>
-        </ion-item>
-        <ion-item>
-          <ion-input
-            label="Periódo en que se cobraran los abonos"
-            [(ngModel)]="eregistro.periodocobrar"
-            labelPlacement="stacked"
-            [clearInput]="true"
-            placeholder="Semanal, quincenal o mensual"
-            value=""
-          >
-          </ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-input
-            label="Día"
-            [(ngModel)]="eregistro.diacobrar"
-            labelPlacement="stacked"
-            [clearInput]="true"
-            placeholder="Que día quieres que se pase a cobrar"
-            value=""
-          >
-          </ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-input
-            label="Hora en la que te encuentras"
-            [(ngModel)]="eregistro.horacobrar"
-            labelPlacement="stacked"
-            [clearInput]="true"
-            placeholder="En que hora se encuentra para cobrarle"
-            value="">
-          </ion-input>
-        </ion-item>
+          <ion-item>
+            <ion-input label="Nombre" [(ngModel)]="eregistro.nombre" labelPlacement="stacked" [clearInput]="true"
+              placeholder="Teclea el nombre del cliente" value="">
+            </ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-textarea label="Domicilio" [(ngModel)]="eregistro.domicilio" labelPlacement="stacked"
+              placeholder="Teclea el domicilio del cliente" value="">
+            </ion-textarea>
+          </ion-item>
+          <ion-item>
+            <ion-input label="Correo" [(ngModel)]="eregistro.correo" labelPlacement="stacked" [clearInput]="true"
+              placeholder="Teclea el correo del cliente" value="">
+            </ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input label="Teléfono" [(ngModel)]="eregistro.telefono" labelPlacement="stacked" [clearInput]="true"
+              placeholder="Teclea el télefono del cliente" value="">
+            </ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-textarea label="Fotografía" [(ngModel)]="eregistro.fotografia" labelPlacement="stacked"
+              placeholder="Teclea la URL de la fotografía del cliente" value="">
+            </ion-textarea>
+          </ion-item>
+          <ion-item>
+            <ion-input label="Periódo en que se cobraran los abonos" [(ngModel)]="eregistro.periodocobrar"
+              labelPlacement="stacked" [clearInput]="true" placeholder="Semanal, quincenal o mensual" value="">
+            </ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input label="Día" [(ngModel)]="eregistro.diacobrar" labelPlacement="stacked" [clearInput]="true"
+              placeholder="Que día quieres que se pase a cobrar" value="">
+            </ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input label="Hora en la que te encuentras" [(ngModel)]="eregistro.horacobrar" labelPlacement="stacked"
+              [clearInput]="true" placeholder="En que hora se encuentra para cobrarle" value="">
+            </ion-input>
+          </ion-item>
         </ion-list>
       </ion-content>
       <ion-footer class="ion-no-border">
@@ -399,217 +310,7 @@
         </ion-toolbar>
       </ion-footer>
     </ng-template>
-  
-  </ion-modal>
-
-
-  <ion-modal [isOpen]="ProductosModal">
-    <ng-template>
-      <ion-header>
-        <div style="padding:5px;">
-        <ion-row>
-          <ion-button mode="ios" color="medium" (click)="cerrarProductos()">
-            <ion-icon name="chevron-back-outline"></ion-icon>
-          </ion-button>  
-          <ion-avatar>
-            <img alt="Usuario" src="https://stollermexico.com/wp-content/uploads/2021/11/productos.png" />
-          </ion-avatar>
-          <h1 style="padding: 5px;color:white;">Productos</h1>
-        </ion-row>
-        </div>
-      </ion-header>
-      <ion-content mode="ios">
-        <ion-fab slot="fixed" vertical="top" horizontal="end" [edge]="true">
-          <ion-fab-button (click)="abrirAgregarProductosModal()">
-            <ion-icon name="add"></ion-icon>
-          </ion-fab-button>
-        </ion-fab>
-
-        <ion-row class="productos-list">
-          <ion-card  color="light" *ngFor="let producto of productos;" (click)="editarProducto(producto)">
-          <img src="{{producto.fotografia}}" alt="fotografia">
-          <ion-card-title>{{producto.nombre}}</ion-card-title>
-          <ion-card-subtitle>{{producto.descripcion}}</ion-card-subtitle>
-          <ion-card-content>
-           <p><b>Cantidad </b>{{producto.cantidad}}</p>
-           <p><b>Precio de venta </b>{{producto.precioVenta}}</p>
-           <p><b>Precio de costo </b>{{producto.precioCosto}}</p>
-           <p>{{producto.id}}</p>
-          </ion-card-content>
-          </ion-card>
-      </ion-row>
-    </ion-content>
-    </ng-template>
-  </ion-modal>
-
-  <ion-modal [isOpen]="agregarProductosModal">
-    <ng-template>
-      <ion-header mode="ios">
-        <ion-title style="color: white;">
-          Agregar producto
-        </ion-title>
-      </ion-header>
-      <ion-content>
-        <ion-list>
-          <ion-item>
-            <ion-input label="Nombre del producto"[(ngModel)]="producto.nombre"
-            labelPlacement="stacked"
-            [clearInput]="true"
-            placeholder="Teclea el nombre del producto"
-            value=""></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-input label="Descripción"[(ngModel)]="producto.descripcion"
-            labelPlacement="stacked"
-            [clearInput]="true"
-            placeholder="Teclea descripción del producto"
-            value=""></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-input label="Cantidad"[(ngModel)]="producto.cantidad"
-            labelPlacement="stacked"
-            [clearInput]="true"
-            placeholder="Teclea la cantidad del producto"
-            value=""></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-input label="Precio de venta"[(ngModel)]="producto.precioVenta"
-            labelPlacement="stacked"
-            [clearInput]="true"
-            placeholder="Teclea el precio de venta del producto"
-            value=""></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-input label="Precio de costo"[(ngModel)]="producto.precioCosto"
-            labelPlacement="stacked"
-            [clearInput]="true"
-            placeholder="Teclea el precio de costo del producto"
-            value=""></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-input label="Fotografía URL"[(ngModel)]="producto.fotografia"
-            labelPlacement="stacked"
-            [clearInput]="true"
-            placeholder="Teclea la url del producto"
-            value=""></ion-input>
-          </ion-item>
-
-        </ion-list>
-      </ion-content>
-
-      <ion-footer class="ion-no-border">
-        <ion-toolbar color="medium" mode="ios" style="text-align: center;">
-        <ion-button color="success" (click)="guardarProductos()">Guardar</ion-button>
-        <ion-button color="dark" (click)="CancelarAgregarProductosModal()">Cancelar</ion-button>
-        </ion-toolbar>
-      </ion-footer>
-    </ng-template>
-  </ion-modal>
-
-  <ion-modal [isOpen]="editarProducto">
-    <ng-template>
-      <ion-header mode="ios">
-        <ion-title style="color: white;">Editar producto</ion-title>
-      </ion-header>
-      <ion-content>
-        <ion-list lines="full">
-          <ion-item>
-            <ion-input label="Nombre del producto"[(ngModel)]="eproducto.nombre"
-            labelPlacement="stacked"
-            [clearInput]="true"
-            placeholder="Teclea el nombre del producto"
-            value="">
-          </ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-input label="Descripción"[(ngModel)]="eproducto.descripcion"
-            labelPlacement="stacked"
-            [clearInput]="true"
-            placeholder="Teclea descripción del producto"
-            value="">
-            </ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-input label="Cantidad"[(ngModel)]="eproducto.cantidad"
-            labelPlacement="stacked"
-            [clearInput]="true"
-            placeholder="Teclea la cantidad del producto"
-            value="">
-            </ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-input label="Precio de venta"[(ngModel)]="eproducto.precioVenta"
-            labelPlacement="stacked"
-            [clearInput]="true"
-            placeholder="Teclea el precio de venta del producto"
-            value="">
-            </ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-input label="Precio de costo"[(ngModel)]="eproducto.precioCosto"
-            labelPlacement="stacked"
-            [clearInput]="true"
-            placeholder="Teclea el precio de costo del producto"
-            value="">
-            </ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-input label="Fotografía URL"[(ngModel)]="eproducto.fotografia"
-            labelPlacement="stacked"
-            [clearInput]="true"
-            placeholder="Teclea la url del producto"
-            value="">
-            </ion-input>
-          </ion-item>
-        </ion-list>
-      </ion-content>
-
-      <ion-footer class="ion-no-border">
-        <ion-toolbar color="medium" mode="ios" style="text-align: center;">
-          <ion-button color="success" (click)="guardarEdicionProducto(eproducto)">Guardar</ion-button>
-          <ion-button color="danger" (click)="eliminarProducto(eproducto.id)">Eliminar</ion-button>
-          <ion-button color="dark" (click)="CancelarActualizarProductosModal()">Cancelar</ion-button>
-        </ion-toolbar>
-      </ion-footer>
-    </ng-template>
-  </ion-modal>
-
-  <ion-modal [isOpen]="VentasModal">
-    <ng-template>
-      <ion-header>
-        <div style="padding: 5px;">
-          <ion-row>
-
-            <ion-button mode="ios" color="medium" (click)="cerrarVentas()">
-              <ion-icon name="chevron-back-outline"></ion-icon>
-            </ion-button>
-            <ion-avatar>
-              <img alt="Ventas" src="https://static.semrush.com/blog/uploads/media/81/69/81699c8c370f16072b6655fc74dfb27c/top-5-actionable-ideas-for-upselling-your-agency-clients.svg" />
-            </ion-avatar>
-            <h1 style="padding: 5px;color:white;">Ventas</h1>
-          </ion-row>
-        </div>
-      </ion-header>
-      <ion-content mode="ios">
-        <ion-fab slot="fixed" vertical="top" horizontal="end" [edge]="true">
-          <ion-fab-button (click)="abrirAgregarVentasModal()">
-            <ion-icon name="add"></ion-icon>
-          </ion-fab-button>
-        </ion-fab>
-      </ion-content>
-    
-      
-    </ng-template>
-  </ion-modal>
-
-  <ion-modal [isOpen]="agregarVentasModal">
-    <ng-template>
-      <ion-header mode="ios">
-        <ion-title style="color: white;">
-          Agregar venta
-        </ion-title>
-      </ion-header>
-    </ng-template>
 
   </ion-modal>
+
 </ion-content>
