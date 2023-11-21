@@ -36,7 +36,8 @@ export class HomePage {
   ProductosModal = false;
   agregarClientesModal = false;
   agregarProductosModal=false;
-  editarClientesModal=false;
+  editarClientesModal = false;
+  editarProductosModal=false;
 
   username: string="";
   password: string="";
@@ -65,7 +66,8 @@ export class HomePage {
     precio: "",
     id: 0
   }
-  eregistro=this.registro;
+  eregistro = this.registro;
+  eproducto = this.producto;
 
   constructor() {
     this.usuarios.push({
@@ -158,6 +160,11 @@ export class HomePage {
     });
     this.editarClientesModal=false;
   }
+  eliminarProducto(id:number){
+    const index = this.productos.findIndex(item => item.id === id);
+    this.productos.splice(index, 1);
+    this.editarProductosModal=false;
+  }
   actualizarCliente(ecliente:any){
     for(let i=0;i<this.clientes.length;i++){
       if(this.clientes[i].id==ecliente.id)
@@ -171,13 +178,24 @@ export class HomePage {
     });
     this.editarClientesModal=false;
   }
+  actualizarProducto(ecliente:any){
+    for(let i=0;i<this.productos.length;i++){
+      if(this.productos[i].id==ecliente.id)
+      {
+        this.productos[i]=ecliente;
+        break;
+      }
+    }
+    this.editarProductosModal=false;
+  }
 
   editarCliente(cliente:any){
     this.eregistro=cliente;
     this.editarClientesModal=true;
   }
   editarProducto(producto: any) {
-    alert(producto);
+    this.eproducto=producto;
+    this.editarProductosModal=true;
   }
   CancelarAgregarClientesModal(){
     this.agregarClientesModal=false;
@@ -189,7 +207,9 @@ export class HomePage {
   CancelarActualizarClientesModal(){
     this.editarClientesModal=false;
   }
-
+  CancelarActualizarProductosModal(){
+    this.editarProductosModal=false;
+  }
 
   login(){
     const indice = this.usuarios.findIndex((usuario: { usuario: any; contrasena: any; }) => {

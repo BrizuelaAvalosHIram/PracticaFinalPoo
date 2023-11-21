@@ -394,4 +394,46 @@
 
   </ion-modal>
 
+  <ion-modal [isOpen]="editarProductosModal">
+    <ng-template>
+      <ion-header mode="ios">
+        <ion-title style="color: white;">
+          Editar producto
+        </ion-title>
+      </ion-header>
+      <ion-content>
+        <ion-list>
+          <ion-item>
+            <ion-input label="Nombre" [(ngModel)]="eproducto.nombre" labelPlacement="stacked" [clearInput]="true"
+              placeholder="Teclea el nombre del cliente" value="">
+            </ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-textarea label="Fotografía" [(ngModel)]="eproducto.fotografia" labelPlacement="stacked"
+              placeholder="Teclea la URL de la fotografía del cliente" value="">
+            </ion-textarea>
+          </ion-item>
+          <ion-item>
+            <ion-input label="Cantidad" [(ngModel)]="eproducto.cantidad" labelPlacement="stacked" [clearInput]="true"
+              placeholder="En que hora se encuentra para cobrarle" value="">
+            </ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input label="Precio" [(ngModel)]="eproducto.precio" labelPlacement="stacked" [clearInput]="true"
+              placeholder="En que hora se encuentra para cobrarle" value="">
+            </ion-input>
+          </ion-item>
+        </ion-list>
+      </ion-content>
+      <ion-footer class="ion-no-border">
+        <ion-toolbar color="medium" mode="ios" style="text-align: center;">
+          <ion-button color="success" (click)="actualizarProducto(eproducto)">Guardar</ion-button>
+          <ion-button color="danger" (click)="eliminarProducto(eproducto.id)">Eliminar</ion-button>
+          <ion-button color="dark" (click)="CancelarActualizarProductosModal()">Cancelar</ion-button>
+        </ion-toolbar>
+      </ion-footer>
+    </ng-template>
+
+  </ion-modal>
+
 </ion-content>
