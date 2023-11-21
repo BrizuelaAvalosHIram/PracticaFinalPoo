@@ -11,8 +11,10 @@ export class HomePage {
   @ViewChild(IonModal)
   modal!: IonModal;
   usuarios:any=[];
-  clientes:any[] = [];
-  filteredCliente:any[] = [];
+  clientes: any[] = [];
+  productos: any[] = [];
+  filteredCliente: any[] = [];
+  filteredProducto:any[] = [];
 
   elemento:{usuario:string,
     nombre:string,
@@ -55,6 +57,13 @@ export class HomePage {
     horacobrar:"",
     idtienda:this.elemento.id,
     id:0
+  }
+  producto = {
+    nombre: "",
+    fotografia: "",
+    cantidad: "",
+    precio: "",
+    id: 0
   }
   eregistro=this.registro;
 
@@ -167,7 +176,9 @@ export class HomePage {
     this.eregistro=cliente;
     this.editarClientesModal=true;
   }
-
+  editarProducto(producto: any) {
+    alert(producto);
+  }
   CancelarAgregarClientesModal(){
     this.agregarClientesModal=false;
   }
@@ -221,6 +232,30 @@ export class HomePage {
     this.storeName="";
     this.imageUrl="";
     this.modal.dismiss(null, 'guardarusuario');
+  }
+
+  guardarProducto() {
+    let id=0;
+    if (this.productos.length>0)
+    id=this.productos[this.productos.length-1].id++;
+    else
+    id=1;
+
+    this.productos.push({
+      nombre:this.producto.nombre,
+      fotografia:this.producto.fotografia,
+      cantidad:this.producto.cantidad,
+      precio:this.producto.precio,
+      id:id
+    });
+    this.producto = {
+    nombre: "",
+    fotografia: "",
+    cantidad: "",
+    precio: "",
+    id: 0
+  }
+    this.agregarProductosModal = false;
   }
 
   onWillDismiss(event: Event) {
