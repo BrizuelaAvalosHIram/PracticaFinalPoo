@@ -26,8 +26,6 @@
       <div style="text-align: center;">
         Tiendas registradas {{usuarios.length}}
       </div>
-
-
     </ion-card-content>
 
   </ion-card>
@@ -115,7 +113,7 @@
         </ion-row>
         <ion-row>
           <ion-col>
-            <ion-card color="tertiary">
+            <ion-card color="tertiary" (click)="venderModal()">
               <img alt="Vender"
                 src="https://static.semrush.com/blog/uploads/media/81/69/81699c8c370f16072b6655fc74dfb27c/top-5-actionable-ideas-for-upselling-your-agency-clients.svg" />
 
@@ -174,7 +172,7 @@
             <img src="{{producto.fotografia}}" alt="fotografia">
             <ion-card-title>{{producto.nombre}}</ion-card-title>
             <ion-card-content>
-              <p><b>Cantidad </b>{{producto.cantidad}}</p>
+              <p><b>Disponibles </b>{{producto.cantidad}}</p>
               <p><b>Precio </b>${{producto.precio}}</p>
               <p>{{producto.id}}</p>
             </ion-card-content>
@@ -223,6 +221,48 @@
               <p><b>A la hora </b>{{cliente.horacobrar}}</p>
               <p>{{cliente.id}}</p>
             </ion-card-content>
+          </ion-card>
+
+        </ion-row>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
+  <ion-modal [isOpen]="VenderModal">
+    <ng-template>
+      <ion-header>
+        <div style="padding: 5px;">
+          <ion-row>
+
+            <ion-button mode="ios" color="medium" (click)="cerrarVender()">
+              <ion-icon name="chevron-back-outline"></ion-icon>
+            </ion-button>
+            <ion-avatar>
+              <img alt="Vender"
+                src="https://static.semrush.com/blog/uploads/media/81/69/81699c8c370f16072b6655fc74dfb27c/top-5-actionable-ideas-for-upselling-your-agency-clients.svg" />
+            </ion-avatar>
+            <h1 style="padding: 5px;color:white;">Vender</h1>
+          </ion-row>
+        </div>
+      </ion-header>
+
+      <ion-content mode="ios">
+        <ion-fab slot="fixed" vertical="top" horizontal="end" [edge]="true">
+          <ion-fab-button (click)="HacerVenta()">
+            <ion-icon name="checkmark-outline"></ion-icon>
+          </ion-fab-button>
+        </ion-fab>
+
+        <ion-row>
+          <ion-card color="light" *ngFor="let producto of productos;" (click)="toggleSelection(producto)">
+            <img src="{{producto.fotografia}}" alt="fotografia">
+            <ion-card-title>{{producto.nombre}}</ion-card-title>
+            <ion-card-content>
+              <ion-input [(ngModel)]="producto.pedido" label="Cantidad" type="number"></ion-input>
+              <p><b>Precio </b>${{producto.precio}}</p>
+              <p>{{producto.id}}</p>
+            </ion-card-content>
+            <ion-icon *ngIf="producto.selected" name="checkmark-circle" color="primary"></ion-icon>
           </ion-card>
 
         </ion-row>

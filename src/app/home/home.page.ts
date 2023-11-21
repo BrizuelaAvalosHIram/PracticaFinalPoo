@@ -12,9 +12,30 @@ export class HomePage {
   modal!: IonModal;
   usuarios:any=[];
   clientes: any[] = [];
-  productos: any[] = [];
+  productos: any[] = [
+    {
+    nombre: "Manzana",
+    fotografia: "url",
+    cantidad: "10",
+    precio: "2",
+    id: 1,
+    selected: false,
+    pedido: 0
+    },
+    {
+    nombre: "Platano",
+    fotografia: "url",
+    cantidad: "15",
+    precio: "5",
+    id: 2,
+    selected: false,
+    pedido: 0
+  }
+  ];
+  carrito: any[] = [];
   filteredCliente: any[] = [];
   filteredProducto:any[] = [];
+  total = 0;
 
   elemento:{usuario:string,
     nombre:string,
@@ -34,8 +55,10 @@ export class HomePage {
   MenuPrincipal  = true;
   ClientesModal = false;
   ProductosModal = false;
+  VenderModal = false;
   agregarClientesModal = false;
-  agregarProductosModal=false;
+  agregarProductosModal = false;
+  agregarVentaModal=false;
   editarClientesModal = false;
   editarProductosModal=false;
 
@@ -64,7 +87,9 @@ export class HomePage {
     fotografia: "",
     cantidad: "",
     precio: "",
-    id: 0
+    id: 0,
+    selected: false,
+    pedido: 0
   }
   eregistro = this.registro;
   eproducto = this.producto;
@@ -80,6 +105,11 @@ export class HomePage {
     });
   }
 
+  toggleSelection(item: any) {
+    item.selected = !item.selected;
+  }
+
+
   setOpen(isOpen: boolean) {
     this.MenuPrincipal = isOpen;
   }
@@ -91,6 +121,9 @@ export class HomePage {
   {
     this.ProductosModal=false;
   }
+  cerrarVender() {
+    this.VenderModal = false;
+  }
   clientesModal()
   {
     this.ClientesModal=true;
@@ -99,6 +132,9 @@ export class HomePage {
   {
     this.ProductosModal=true;
   }
+  venderModal() {
+    this.VenderModal = true;
+  }
   AgregarClientesModal()
   {
     this.agregarClientesModal=true;
@@ -106,6 +142,18 @@ export class HomePage {
   AgregarProductosModal()
   {
     this.agregarProductosModal=true;
+  }
+  HacerVenta() {
+    this.carrito = [];
+    this.total = 0;
+    for(let i=0;i<this.productos.length;i++){
+      if(this.productos[i].selected===true){
+        this.total += parseInt(this.productos[i].pedido)
+        this.carrito.push(this.productos[i])
+      }
+    }
+    console.log(this.total);
+    console.log(this.carrito);
   }
 
   guardarClientes()
@@ -273,7 +321,9 @@ export class HomePage {
     fotografia: "",
     cantidad: "",
     precio: "",
-    id: 0
+    id: 0,
+    selected: false,
+    pedido: 0
   }
     this.agregarProductosModal = false;
   }
