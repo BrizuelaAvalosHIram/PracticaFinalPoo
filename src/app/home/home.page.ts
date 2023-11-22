@@ -11,7 +11,19 @@ export class HomePage {
   @ViewChild(IonModal)
   modal!: IonModal;
   usuarios:any=[];
-  clientes: any[] = [];
+  clientes: any[] = [{
+      nombre:"Esteban",
+      domicilio:"Plutarco Elias Calles",
+      correo:"ecortina@ucol.mx",
+      telefono:"3121032760",
+      fotografia:"url",
+      periodocobrar:"mensual",
+      diacobrar:"10",
+      horacobrar:"5",
+      idtienda:"1",
+      id: 1,
+      selected: false,
+    }];
   productos: any[] = [
     {
     nombre: "Manzana",
@@ -33,6 +45,9 @@ export class HomePage {
   }
   ];
   carrito: any[] = [];
+  carritoClientes: any[] = [];
+  ventas: any[] = [];
+  id_venta = 0;
   filteredCliente: any[] = [];
   filteredProducto:any[] = [];
   total = 0;
@@ -54,8 +69,12 @@ export class HomePage {
   contrasena=""
   MenuPrincipal  = true;
   ClientesModal = false;
+  SeleccionarProductosModal = false;
+  SeleccionarClientesModal = false;
   ProductosModal = false;
   VenderModal = false;
+  VentasModal = false;
+  ReportesModal = false;
   agregarClientesModal = false;
   agregarProductosModal = false;
   agregarVentaModal=false;
@@ -70,6 +89,13 @@ export class HomePage {
   imageUrl: string="";
   notiendas=0;
 
+  venta = {
+    id: 0,
+    cliente: "",
+    productos: "",
+    total: 0
+  }
+
   registro={
     nombre:"",
     domicilio:"",
@@ -80,7 +106,8 @@ export class HomePage {
     diacobrar:"",
     horacobrar:"",
     idtienda:this.elemento.id,
-    id:0
+    id: 0,
+    selected: false
   }
   producto = {
     nombre: "",
@@ -117,6 +144,10 @@ export class HomePage {
   {
     this.ClientesModal=false;
   }
+  cerrarSeleccionarClientes()
+  {
+    this.SeleccionarClientesModal=false;
+  }
   cerrarProductos()
   {
     this.ProductosModal=false;
@@ -133,7 +164,13 @@ export class HomePage {
     this.ProductosModal=true;
   }
   venderModal() {
-    this.VenderModal = true;
+    this.SeleccionarClientesModal = true;
+  }
+  ventasModal() {
+    this.ReportesModal = true;
+  }
+  reportesModal() {
+    this.ReportesModal = true;
   }
   AgregarClientesModal()
   {
@@ -143,7 +180,7 @@ export class HomePage {
   {
     this.agregarProductosModal=true;
   }
-  HacerVenta() {
+  SeleccionarProductos() {
     this.carrito = [];
     this.total = 0;
     for(let i=0;i<this.productos.length;i++){
@@ -152,13 +189,32 @@ export class HomePage {
         this.carrito.push(this.productos[i])
       }
     }
-    console.log(this.total);
-    console.log(this.carrito);
+
+    this.venta = { id: this.id_venta, cliente: JSON.stringify(this.carritoClientes), productos: JSON.stringify(this.carrito), total: this.total }
+    this.SeleccionarProductosModal = false;
+    this.SeleccionarClientesModal = false;
+    this.ventas.push(this.venta);
+    localStorage.setItem("ventasLocal", JSON.stringify(this.ventas))
+  }
+
+  SeleccionarCliente() {
+    this.carritoClientes = [];
+    for(let i=0;i<this.clientes.length;i++){
+      if(this.clientes[i].selected===true){
+        this.carritoClientes.push(this.clientes[i])
+        this.id_venta += 1;
+        this.SeleccionarProductosModal = true;
+      }
+    }
+  }
+
+  HacerVenta() {
+
   }
 
   guardarClientes()
   {
-    let id=0;
+    let id=1;
     if(this.clientes.length > 0) {
       id=(this.clientes[this.clientes.length-1].id)+1;
     }
@@ -175,7 +231,8 @@ export class HomePage {
       diacobrar:this.registro.diacobrar,
       horacobrar:this.registro.horacobrar,
       idtienda:this.elemento.id,
-      id:id
+      id: id,
+      selected: false,
     });
 
     this.filteredCliente = this.clientes.filter((cliente: { idtienda: number; }) => {
@@ -195,7 +252,8 @@ export class HomePage {
       diacobrar:"",
       horacobrar:"",
       idtienda:this.elemento.id,
-      id:0
+      id: 0,
+      selected: false
     }
     this.agregarClientesModal=false;
   }

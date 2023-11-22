@@ -126,7 +126,7 @@
             </ion-card>
           </ion-col>
           <ion-col>
-            <ion-card color="light">
+            <ion-card color="light" (click)="ventasModal()">
               <img alt="Reportes" width="80%"
                 src="https://www.merida.gob.mx/municipio/portal/assets/img/elements/gaceta.svg" />
 
@@ -208,7 +208,7 @@
         </ion-fab>
 
         <ion-row>
-          <ion-card color="light" *ngFor="let cliente of filteredCliente;" (click)="editarCliente(cliente)">
+          <ion-card color="light" *ngFor="let cliente of clientes;" (click)="editarCliente(cliente)">
             <img src="{{cliente.fotografia}}" alt="fotografia">
             <ion-card-title>{{cliente.nombre}}</ion-card-title>
             <ion-card-subtitle>{{cliente.domicilio}}</ion-card-subtitle>
@@ -228,28 +228,68 @@
     </ng-template>
   </ion-modal>
 
-  <ion-modal [isOpen]="VenderModal">
+  <ion-modal [isOpen]="ReportesModal">
     <ng-template>
       <ion-header>
         <div style="padding: 5px;">
           <ion-row>
 
-            <ion-button mode="ios" color="medium" (click)="cerrarVender()">
+            <ion-button mode="ios" color="medium" (click)="cerrarClientes()">
               <ion-icon name="chevron-back-outline"></ion-icon>
             </ion-button>
             <ion-avatar>
-              <img alt="Vender"
-                src="https://static.semrush.com/blog/uploads/media/81/69/81699c8c370f16072b6655fc74dfb27c/top-5-actionable-ideas-for-upselling-your-agency-clients.svg" />
+              <img alt="Usuario"
+                src="https://images.vexels.com/media/users/3/205237/isolated/preview/ed7b0a564fc695b0b91c4ac1276c661d-icono-de-trazo-de-servicio-al-cliente.png" />
             </ion-avatar>
-            <h1 style="padding: 5px;color:white;">Vender</h1>
+            <h1 style="padding: 5px;color:white;">Reportes</h1>
           </ion-row>
         </div>
       </ion-header>
 
       <ion-content mode="ios">
         <ion-fab slot="fixed" vertical="top" horizontal="end" [edge]="true">
-          <ion-fab-button (click)="HacerVenta()">
-            <ion-icon name="checkmark-outline"></ion-icon>
+          <ion-fab-button (click)="AgregarClientesModal()">
+            <ion-icon name="add"></ion-icon>
+          </ion-fab-button>
+        </ion-fab>
+
+        <ion-row>
+          <ion-card color="light" *ngFor="let venta of ventas;">
+            <ion-card-content>
+              <p><b>Id </b>{{venta.id}}</p>
+              <p><b>Clientes </b>{{venta.cliente}}</p>
+              <p><b>Productos </b>{{venta.productos}}</p>
+              <p><b>Total </b>{{venta.total}}</p>
+            </ion-card-content>
+          </ion-card>
+
+        </ion-row>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
+  <ion-modal [isOpen]="SeleccionarProductosModal">
+    <ng-template>
+      <ion-header>
+        <div style="padding: 5px;">
+          <ion-row>
+
+            <ion-button mode="ios" color="medium" (click)="cerrarClientes()">
+              <ion-icon name="chevron-back-outline"></ion-icon>
+            </ion-button>
+            <ion-avatar>
+              <img alt="Usuario"
+                src="https://images.vexels.com/media/users/3/205237/isolated/preview/ed7b0a564fc695b0b91c4ac1276c661d-icono-de-trazo-de-servicio-al-cliente.png" />
+            </ion-avatar>
+            <h1 style="padding: 5px;color:white;">Seleccioanr productosModal</h1>
+          </ion-row>
+        </div>
+      </ion-header>
+
+      <ion-content mode="ios">
+        <ion-fab slot="fixed" vertical="top" horizontal="end" [edge]="true">
+          <ion-fab-button (click)="SeleccionarProductos()">
+            <ion-icon name="add"></ion-icon>
           </ion-fab-button>
         </ion-fab>
 
@@ -270,6 +310,51 @@
     </ng-template>
   </ion-modal>
 
+  <ion-modal [isOpen]="SeleccionarClientesModal">
+    <ng-template>
+      <ion-header>
+        <div style="padding: 5px;">
+          <ion-row>
+
+            <ion-button mode="ios" color="medium" (click)="cerrarVender()">
+              <ion-icon name="chevron-back-outline"></ion-icon>
+            </ion-button>
+            <ion-avatar>
+              <img alt="Vender" src="https://www.merida.gob.mx/municipio/portal/assets/img/elements/gaceta.svg" />
+            </ion-avatar>
+            <h1 style="padding: 5px;color:white;">Reportes</h1>
+          </ion-row>
+        </div>
+      </ion-header>
+
+      <ion-content mode="ios">
+        <ion-fab slot="fixed" vertical="top" horizontal="end" [edge]="true">
+          <ion-fab-button (click)="SeleccionarCliente()">
+            <ion-icon name="checkmark-outline"></ion-icon>
+          </ion-fab-button>
+        </ion-fab>
+
+        <ion-row>
+          <ion-card color="light" *ngFor="let cliente of clientes;" (click)="toggleSelection(cliente)">
+            <img src="{{cliente.fotografia}}" alt="fotografia">
+            <ion-card-title>{{cliente.nombre}}</ion-card-title>
+            <ion-card-subtitle>{{cliente.domicilio}}</ion-card-subtitle>
+            <ion-card-content>
+              <p><b>Correo </b>{{cliente.correo}}</p>
+              <p><b>Teléfono </b>{{cliente.telefono}}</p>
+              <p><b>Correo </b>{{cliente.correo}}</p>
+              <p><b>El periodo para cobrar es </b>{{cliente.periodocobrar}}</p>
+              <p><b>El día </b>{{cliente.diacobrar}}</p>
+              <p><b>A la hora </b>{{cliente.horacobrar}}</p>
+              <p>{{cliente.id}}</p>
+            </ion-card-content>
+            <ion-icon *ngIf="cliente.selected" name="checkmark-circle" color="primary"></ion-icon>
+          </ion-card>
+
+        </ion-row>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
 
 
   <ion-modal [isOpen]="agregarProductosModal">
