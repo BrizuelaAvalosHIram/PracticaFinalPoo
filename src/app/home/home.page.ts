@@ -10,7 +10,7 @@ import { OverlayEventDetail } from '@ionic/core/components';
 export class HomePage {
   @ViewChild(IonModal)
   modal!: IonModal;
-  usuarios:any=[];
+  usuarios: any = [];
   clientes: any[] = [{
       nombre:"Esteban",
       domicilio:"Plutarco Elias Calles",
@@ -122,6 +122,9 @@ export class HomePage {
   eproducto = this.producto;
 
   constructor() {
+    this.llenarUsuarios();
+    this.llenarProductos();
+    /*
     this.usuarios.push({
       usuario:"uno",
       nombre:"uno perez",
@@ -130,8 +133,29 @@ export class HomePage {
       fotografia:"https://www.ceupe.com/images/easyblog_articles/3625/b2ap3_large_que-es-un-tienda-online.png",
       id:1
     });
+    */
   }
 
+  llenarProductos() {
+    fetch("https://apiesteban.000webhostapp.com/api/productos/listar.php")
+      .then(response => response.json())
+      .then(data => {
+        this.productos = data;
+        console.log(data)
+        console.log(this.productos)
+      })
+  }
+
+
+  llenarUsuarios() {
+    fetch("https://apiesteban.000webhostapp.com/ucol_api/usuarios/listar.php")
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+        this.usuarios = data;
+        this.clientes = data;
+      })
+}
   toggleSelection(item: any) {
     item.selected = !item.selected;
   }
@@ -153,7 +177,7 @@ export class HomePage {
     this.ProductosModal=false;
   }
   cerrarVender() {
-    this.VenderModal = false;
+    this.SeleccionarClientesModal = false;
   }
   clientesModal()
   {

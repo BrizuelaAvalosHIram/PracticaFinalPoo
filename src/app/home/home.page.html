@@ -169,11 +169,11 @@
 
         <ion-row>
           <ion-card color="light" *ngFor="let producto of productos;" (click)="editarProducto(producto)">
-            <img style="width: 120px; height: 120px;" src="{{producto.fotografia}}" alt="fotografia">
-            <ion-card-title>{{producto.nombre}}</ion-card-title>
+            <img style="width: 120px; height: 120px;" src="{{producto.url_imagen}}" alt="fotografia">
+            <ion-card-title>{{producto.Nombre}}</ion-card-title>
             <ion-card-content>
-              <p><b>Disponibles </b>{{producto.cantidad}}</p>
-              <p><b>Precio </b>${{producto.precio}}</p>
+              <p><b>Disponibles </b>{{producto.Disponibles}}</p>
+              <p><b>Precio </b>${{producto.Precio}}</p>
               <p>{{producto.id}}</p>
             </ion-card-content>
           </ion-card>
@@ -209,16 +209,15 @@
 
         <ion-row>
           <ion-card color="light" *ngFor="let cliente of clientes;" (click)="editarCliente(cliente)">
-            <img src="{{cliente.fotografia}}" alt="fotografia">
-            <ion-card-title>{{cliente.nombre}}</ion-card-title>
-            <ion-card-subtitle>{{cliente.domicilio}}</ion-card-subtitle>
+            <img src="{{cliente.Url_imagen}}" alt="fotografia">
+            <ion-card-title>{{cliente.Nombre}}</ion-card-title>
+            <ion-card-subtitle>{{cliente.Domicilio}}</ion-card-subtitle>
             <ion-card-content>
-              <p><b>Correo </b>{{cliente.correo}}</p>
-              <p><b>Teléfono </b>{{cliente.telefono}}</p>
-              <p><b>Correo </b>{{cliente.correo}}</p>
-              <p><b>El periodo para cobrar es </b>{{cliente.periodocobrar}}</p>
-              <p><b>El día </b>{{cliente.diacobrar}}</p>
-              <p><b>A la hora </b>{{cliente.horacobrar}}</p>
+              <p><b>Teléfono </b>{{cliente.Telefono}}</p>
+              <p><b>Correo </b>{{cliente.Correo}}</p>
+              <p><b>El periodo para cobrar es </b>{{cliente.Periodocobrar}}</p>
+              <p><b>El día </b>{{cliente.Diacobrar}}</p>
+              <p><b>A la hora </b>{{cliente.Horacobrar}}</p>
               <p>{{cliente.id}}</p>
             </ion-card-content>
           </ion-card>
