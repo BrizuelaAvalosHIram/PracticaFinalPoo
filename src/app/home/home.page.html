@@ -169,7 +169,7 @@
 
         <ion-row>
           <ion-card color="light" *ngFor="let producto of productos;" (click)="editarProducto(producto)">
-            <img src="{{producto.fotografia}}" alt="fotografia">
+            <img style="width: 120px; height: 120px;" src="{{producto.fotografia}}" alt="fotografia">
             <ion-card-title>{{producto.nombre}}</ion-card-title>
             <ion-card-content>
               <p><b>Disponibles </b>{{producto.cantidad}}</p>
@@ -281,7 +281,7 @@
               <img alt="Usuario"
                 src="https://images.vexels.com/media/users/3/205237/isolated/preview/ed7b0a564fc695b0b91c4ac1276c661d-icono-de-trazo-de-servicio-al-cliente.png" />
             </ion-avatar>
-            <h1 style="padding: 5px;color:white;">Seleccioanr productosModal</h1>
+            <h1 style="padding: 5px;color:white;">Seleccioanr productos</h1>
           </ion-row>
         </div>
       </ion-header>
@@ -322,7 +322,7 @@
             <ion-avatar>
               <img alt="Vender" src="https://www.merida.gob.mx/municipio/portal/assets/img/elements/gaceta.svg" />
             </ion-avatar>
-            <h1 style="padding: 5px;color:white;">Reportes</h1>
+            <h1 style="padding: 5px;color:white;">Seleccionar Cliente</h1>
           </ion-row>
         </div>
       </ion-header>
