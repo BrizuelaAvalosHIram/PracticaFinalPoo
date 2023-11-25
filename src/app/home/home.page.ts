@@ -67,7 +67,7 @@ export class HomePage {
     };
   usuario=""
   contrasena=""
-  MenuPrincipal  = true;
+  MenuPrincipal  = false;
   ClientesModal = false;
   SeleccionarProductosModal = false;
   SeleccionarClientesModal = false;
@@ -141,7 +141,6 @@ export class HomePage {
       .then(response => response.json())
       .then(data => {
         this.productos = data;
-        console.log(data)
         console.log(this.productos)
       })
   }
@@ -341,18 +340,21 @@ export class HomePage {
     this.editarProductosModal=false;
   }
 
-  login(){
-    const indice = this.usuarios.findIndex((usuario: { usuario: any; contrasena: any; }) => {
-      return usuario.usuario === this.usuario && usuario.contrasena === this.contrasena;
-    });
-
-    if (indice !== -1) {
-       this.elemento = this.usuarios[indice];
-      console.log(this.elemento);
-      this.setOpen(true);
-    } else {
-      alert("No se encontró el usuario");
-    }
+  login() {
+    const url = `https://apiesteban.000webhostapp.com/ucol_api/login.php?credencial=${this.usuario}&pass=${this.contrasena}`;
+    console.log(url);
+    fetch(url)
+      .then(response => response.json())
+      .then(data => {
+        console.log(this.usuario)
+        console.log(this.contrasena)
+        if (data.length>0) {
+          console.log(data)
+          this.setOpen(true);
+        } else {
+          alert("No se encontró el usuario");
+        }
+      });
 
   }
   register(){}
