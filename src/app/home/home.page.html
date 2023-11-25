@@ -49,15 +49,21 @@
         </ion-item>
 
         <ion-item>
+          <ion-input type="text" [(ngModel)]="correo" placeholder="Correo">
+          </ion-input>
+        </ion-item>
+
+        <ion-item>
           <ion-input type="password" [(ngModel)]="password" placeholder="Contraseña">
           </ion-input>
         </ion-item>
 
         <ion-item>
-          <ion-input type="text" [(ngModel)]="storeName" placeholder="Nombre de la tienda">
-          </ion-input>
+          <ion-select (click)="llenarCatalogoTiendas()" placeholder="Tiendas" id="selectTienda" type="text"
+            [(ngModel)]="id_tienda">
+            <ion-select-option *ngFor="let tienda of tiendas" [value]="tienda.id">{{tienda.Nombre}}</ion-select-option>
+          </ion-select>
         </ion-item>
-
         <ion-item>
           <ion-input type="text" [(ngModel)]="imageUrl" placeholder="URL de la imagen">
           </ion-input>

@@ -11,6 +11,7 @@ export class HomePage {
   @ViewChild(IonModal)
   modal!: IonModal;
   usuarios: any = [];
+  tiendas: any = [];
   clientes: any[] = [{
       nombre:"Esteban",
       domicilio:"Plutarco Elias Calles",
@@ -81,11 +82,13 @@ export class HomePage {
   editarClientesModal = false;
   editarProductosModal=false;
 
-  username: string="";
+  username: string = "";
+  correo: string = "";
   password: string="";
   rememberMe: boolean=false;
   name: string="";
-  storeName: string="";
+  storeName: string = "";
+  id_tienda: string = "";
   imageUrl: string="";
   notiendas=0;
 
@@ -124,6 +127,7 @@ export class HomePage {
   constructor() {
     this.llenarUsuarios();
     this.llenarProductos();
+    //this.llenarCatalogoTiendas();
     /*
     this.usuarios.push({
       usuario:"uno",
@@ -154,7 +158,17 @@ export class HomePage {
         this.usuarios = data;
         this.clientes = data;
       })
-}
+  }
+
+  llenarCatalogoTiendas() {
+    const selectTienda = document.getElementById('selectTienda');
+    fetch("https://apiesteban.000webhostapp.com/ucol_api/locales/listar.php")
+      .then(response => response.json())
+      .then(data => {
+        this.tiendas = data;
+      })
+  }
+
   toggleSelection(item: any) {
     item.selected = !item.selected;
   }
@@ -364,25 +378,17 @@ export class HomePage {
   }
 
   guardarusuario() {
-    let id=0;
-    if (this.usuarios.length>0)
-    id=this.usuarios[this.usuarios.length-1].id++;
-    else
-    id=1;
-
-    this.usuarios.push({
-      usuario:this.username,
-      nombre:this.username,
-      contrasena:this.password,
-      tienda:this.storeName,
-      fotografia:this.imageUrl,
-      id:id
-    });
+    fetch(`https://apiesteban.000webhostapp.com/ucol_api/register.php?nombre=${this.name}&apellido=${this.username}&correo=${this.correo}&no_cuenta=0&facultad=poo&telefono=0&tipo=poo&pass=${this.password}&url_imagen=${this.imageUrl}&id_local=${this.id_tienda}`)
+      .then(response => response.json())
+      .then(data => {
+        console.log(data)
+      })
     this.username = "";
-    this.username="";
+    this.name="";
     this.password="";
     this.storeName="";
-    this.imageUrl="";
+    this.imageUrl = "";
+    this.id_tienda = "";
     this.modal.dismiss(null, 'guardarusuario');
   }
 
