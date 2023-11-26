@@ -91,6 +91,12 @@ export class HomePage {
   cliente_hora = ""
   selected_cliente = false
 
+  producto_nombre = ""
+  producto_descripcion = ""
+  producto_precio = ""
+  producto_disponibles = ""
+  producto_url = ""
+
   venta = {
     id: 0,
     cliente: "",
@@ -120,7 +126,17 @@ export class HomePage {
     selected: false,
     pedido: 0
   }
-  eregistro = this.registro;
+  eregistro = {
+    Nombre: "",
+    Domicilio: "",
+    Correo: "",
+    Telefono: "",
+    id: 0,
+    Cuando_cobrar: "",
+    Dia: "",
+    Hora: "",
+    Fotografia: ""
+  }
   eproducto = this.producto;
 
   constructor() {
@@ -139,9 +155,12 @@ export class HomePage {
   }
 
   llenarProductos() {
-    fetch("https://apiesteban.000webhostapp.com/api/productos/listar.php")
+    fetch("https://apiesteban.000webhostapp.com/ucol_api/productos/listar.php")
       .then(response => response.json())
       .then(data => {
+        data.forEach((producto: any) => {
+          producto.selected = false;
+        });
         this.productos = data;
         console.log(this.productos)
       })
@@ -271,30 +290,34 @@ export class HomePage {
   }
 
   eliminarCliente(id:number){
-    const index = this.clientes.findIndex(item => item.id === id);
-    this.clientes.splice(index, 1);
-    this.filteredCliente = this.clientes.filter((cliente: { idtienda: number; }) => {
-      return cliente.idtienda === this.elemento.id;
-    });
-    this.editarClientesModal=false;
+    fetch(`https://apiesteban.000webhostapp.com/ucol_api/clientes/eliminar.php?id=${id}`)
+      .then(response => response.json())
+      .then(data => {
+        this.llenarUsuarios(this.id_tienda_actual);
+        this.editarClientesModal=false;
+      })
   }
   eliminarProducto(id:number){
     const index = this.productos.findIndex(item => item.id === id);
     this.productos.splice(index, 1);
     this.editarProductosModal=false;
   }
-  actualizarCliente(ecliente:any){
-    for(let i=0;i<this.clientes.length;i++){
-      if(this.clientes[i].id==ecliente.id)
-      {
-        this.clientes[i]=ecliente;
-        break;
-      }
-    }
-    this.filteredCliente = this.clientes.filter((cliente: { idtienda: number; }) => {
-      return cliente.idtienda === this.elemento.id;
-    });
-    this.editarClientesModal=false;
+  actualizarCliente(eregistro: any){
+    fetch(`https://apiesteban.000webhostapp.com/ucol_api/clientes/editar.php?id_local=${this.id_tienda_actual}&nombre=${this.cliente_nombre}&domicilio=${this.cliente_domicilio}&correo=${this.cliente_correo}&telefono=${this.cliente_telefono}&fotografia=${this.cliente_fotografia}&cuando_cobrar=${this.cliente_cuando_cobrar}&dia=${this.cliente_dia}&hora=${this.cliente_hora}&id=${eregistro.id}`)
+      .then(response => response.json())
+      .then(data => {
+        this.cliente_nombre = ""
+        this.cliente_domicilio = ""
+        this.cliente_telefono = ""
+        this.cliente_fotografia = ""
+        this.cliente_correo = ""
+        this.cliente_cuando_cobrar = ""
+        this.cliente_dia = ""
+        this.cliente_hora = ""
+        this.selected_cliente = false
+        this.editarClientesModal=false;
+        this.llenarUsuarios(this.id_tienda_actual);
+      })
   }
   actualizarProducto(ecliente:any){
     for(let i=0;i<this.productos.length;i++){
@@ -308,8 +331,16 @@ export class HomePage {
   }
 
   editarCliente(cliente:any){
-    this.eregistro=cliente;
-    this.editarClientesModal=true;
+    this.eregistro = cliente;
+    this.cliente_nombre = cliente.Nombre
+        this.cliente_domicilio = cliente.Domicilio
+        this.cliente_telefono = cliente.Telefono
+        this.cliente_fotografia = cliente.Fotografia
+        this.cliente_correo = cliente.Correo
+        this.cliente_cuando_cobrar = cliente.Cuando_cobrar
+        this.cliente_dia = cliente.Dia
+        this.cliente_hora = cliente.Hora
+        this.editarClientesModal=true;
   }
   editarProducto(producto: any) {
     this.eproducto=producto;
@@ -368,29 +399,12 @@ export class HomePage {
   }
 
   guardarProducto() {
-    let id=0;
-    if (this.productos.length>0)
-    id=this.productos[this.productos.length-1].id++;
-    else
-    id=1;
-
-    this.productos.push({
-      nombre:this.producto.nombre,
-      fotografia:this.producto.fotografia,
-      cantidad:this.producto.cantidad,
-      precio:this.producto.precio,
-      id:id
-    });
-    this.producto = {
-    nombre: "",
-    fotografia: "",
-    cantidad: "",
-    precio: "",
-    id: 0,
-    selected: false,
-    pedido: 0
-  }
-    this.agregarProductosModal = false;
+    fetch(`https://apiesteban.000webhostapp.com/ucol_api/productos/crear.php?nombre=${this.producto_nombre}&descripcion=${this.producto_descripcion}&disponibles=${this.producto_disponibles}&precio=${this.producto_precio}&url_imagen=${this.producto_url}`)
+      .then(response => response.json())
+      .then(data => {
+        this.llenarProductos();
+        this.agregarProductosModal = false;
+      });
   }
 
   onWillDismiss(event: Event) {
