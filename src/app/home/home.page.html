@@ -293,7 +293,7 @@
               <img alt="Usuario"
                 src="https://images.vexels.com/media/users/3/205237/isolated/preview/ed7b0a564fc695b0b91c4ac1276c661d-icono-de-trazo-de-servicio-al-cliente.png" />
             </ion-avatar>
-            <h1 style="padding: 5px;color:white;">Seleccioanr productos</h1>
+            <h1 style="padding: 5px;color:white;">Seleccionar productos</h1>
           </ion-row>
         </div>
       </ion-header>
@@ -301,13 +301,13 @@
       <ion-content mode="ios">
         <ion-fab slot="fixed" vertical="top" horizontal="end" [edge]="true">
           <ion-fab-button (click)="SeleccionarProductos()">
-            <ion-icon name="add"></ion-icon>
+            <ion-icon name="checkmark-circle"></ion-icon>
           </ion-fab-button>
         </ion-fab>
 
         <ion-row>
           <ion-card color="light" *ngFor="let producto of productos;" (click)="toggleSelection(producto)">
-            <img src="{{producto.Fotografia}}" alt="fotografia">
+            <img style="width: 120px; height: 120px;" src="{{producto.Url_imagen}}" alt="fotografia">
             <ion-card-title>{{producto.Nombre}}</ion-card-title>
             <ion-card-content>
               <ion-input [(ngModel)]="producto.pedido" label="Cantidad" type="number"></ion-input>

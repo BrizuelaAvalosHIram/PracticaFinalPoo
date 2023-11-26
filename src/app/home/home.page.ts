@@ -339,16 +339,18 @@ export class HomePage {
   SeleccionarProductos() {
     this.carrito = [];
     this.total = 0;
-    for(let i=0;i<this.productos.length;i++){
-      if (this.productos[i].selected === true) {
-        if (this.productos[i].pedido <= this.productos[i].Disponibles) {
-          this.total += parseInt(this.productos[i].pedido) * this.productos[i].Precio
-          this.carrito.push(this.productos[i])
-        } else {
-          alert(`Solo hay ${this.productos[i].Disponibles} disponibles de ${this.productos[i].Nombre}`);
+      console.log(this.productos.length)
+      for (let i = 0; i < this.productos.length; i++) {
+        if (this.productos[i].selected === true) {
+          if (this.productos[i].pedido <= this.productos[i].Disponibles) {
+            this.total += parseInt(this.productos[i].pedido) * this.productos[i].Precio
+            this.carrito.push(this.productos[i])
+          } else {
+            alert(`Solo hay ${this.productos[i].Disponibles} disponibles de ${this.productos[i].Nombre}`);
+            return;
+          }
         }
       }
-    }
     this.carritoClientes.forEach(cliente => {
       fetch(`https://apiesteban.000webhostapp.com/ucol_api/pedidos/crear.php?id_cliente=${cliente.id}&id_local=${this.id_tienda_actual}&total=${this.total}&fecha=${this.fecha_venta}`)
         .then(response => response.json())
@@ -357,6 +359,7 @@ export class HomePage {
             fetch(`https://apiesteban.000webhostapp.com/ucol_api/pedidos/crear_detalles.php?id_pedido=${data}&id_producto=${producto.id}&cantidad=${producto.pedido}`)
               .then(response => response.json())
               .then(data => {
+                alert(`Ticket: Cliente: ${JSON.stringify(cliente.Nombre)}, Productos: ${JSON.stringify(producto.Nombre)}, Cantidad: ${producto.pedido}, Total: $${JSON.stringify(this.total)}`)
                 this.SeleccionarProductosModal = false;
                 this.SeleccionarClientesModal = false;
               })
