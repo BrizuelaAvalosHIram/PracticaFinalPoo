@@ -13,19 +13,7 @@ export class HomePage {
   usuarios: any = [];
   tiendas: any = [];
   id_tienda_actual: string = "";
-  clientes: any[] = [{
-      nombre:"Esteban",
-      domicilio:"Plutarco Elias Calles",
-      correo:"ecortina@ucol.mx",
-      telefono:"3121032760",
-      fotografia:"url",
-      periodocobrar:"mensual",
-      diacobrar:"10",
-      horacobrar:"5",
-      idtienda:"1",
-      id: 1,
-      selected: false,
-    }];
+  clientes: any[] = [];
   productos: any[] = [
     {
     nombre: "Manzana",
@@ -93,6 +81,16 @@ export class HomePage {
   imageUrl: string="";
   notiendas=0;
 
+  cliente_nombre = ""
+  cliente_domicilio = ""
+  cliente_telefono = ""
+  cliente_fotografia = ""
+  cliente_correo = ""
+  cliente_cuando_cobrar = ""
+  cliente_dia = ""
+  cliente_hora = ""
+  selected_cliente = false
+
   venta = {
     id: 0,
     cliente: "",
@@ -155,8 +153,11 @@ export class HomePage {
     fetch(`https://apiesteban.000webhostapp.com/ucol_api/clientes/listar.php?id_local=${id_local}`)
       .then(response => response.json())
       .then(data => {
-        console.log(data);
+        data.forEach((cliente: any) => {
+          cliente.selected = false;
+        });
         this.clientes = data;
+        console.log(this.clientes);
       })
   }
 
@@ -251,48 +252,22 @@ export class HomePage {
 
   guardarClientes()
   {
-    let id=1;
-    if(this.clientes.length > 0) {
-      id=(this.clientes[this.clientes.length-1].id)+1;
-    }
-    else
-    id=1;
 
-    this.clientes.push({
-      nombre:this.registro.nombre,
-      domicilio:this.registro.domicilio,
-      correo:this.registro.correo,
-      telefono:this.registro.telefono,
-      fotografia:this.registro.fotografia,
-      periodocobrar:this.registro.periodocobrar,
-      diacobrar:this.registro.diacobrar,
-      horacobrar:this.registro.horacobrar,
-      idtienda:this.elemento.id,
-      id: id,
-      selected: false,
-    });
-
-    this.filteredCliente = this.clientes.filter((cliente: { idtienda: number; }) => {
-      return cliente.idtienda === this.elemento.id;
-    });
-    console.log(this.clientes);
-    console.log("Clientes filtrado:");
-    console.log(this.filteredCliente);
-
-    this.registro={
-      nombre:"",
-      domicilio:"",
-      correo:"",
-      telefono:"",
-      fotografia:"",
-      periodocobrar:"",
-      diacobrar:"",
-      horacobrar:"",
-      idtienda:this.elemento.id,
-      id: 0,
-      selected: false
-    }
-    this.agregarClientesModal=false;
+    fetch(`https://apiesteban.000webhostapp.com/ucol_api/clientes/crear.php?id_local=${this.id_tienda_actual}&nombre=${this.cliente_nombre}&domicilio=${this.cliente_domicilio}&correo=${this.cliente_correo}&telefono=${this.cliente_telefono}&fotografia=${this.cliente_fotografia}&cuando_cobrar=${this.cliente_cuando_cobrar}&dia=${this.cliente_dia}&hora=${this.cliente_hora}`)
+      .then(response => response.json())
+      .then(data => {
+        this.cliente_nombre = ""
+        this.cliente_domicilio = ""
+        this.cliente_telefono = ""
+        this.cliente_fotografia = ""
+        this.cliente_correo = ""
+        this.cliente_cuando_cobrar = ""
+        this.cliente_dia = ""
+        this.cliente_hora = ""
+        this.selected_cliente = false
+        this.agregarClientesModal = false;
+        this.llenarUsuarios(this.id_tienda_actual);
+      })
   }
 
   eliminarCliente(id:number){
