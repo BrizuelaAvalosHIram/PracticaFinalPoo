@@ -81,6 +81,8 @@ export class HomePage {
   name: string="";
   storeName: string = "";
   id_tienda: string = "";
+  nombre_tienda: string = "";
+  foto_tienda: string = "";
   imageUrl: string="";
   notiendas=0;
 
@@ -489,10 +491,17 @@ export class HomePage {
         if (data.length>0) {
           console.log(data)
           this.id_tienda_actual = data[0].id_local;
-          this.llenarUsuarios(this.id_tienda_actual);
-          this.llenarProductos(this.id_tienda_actual);
-          this.llenarVentas(this.id_tienda_actual);
-          this.setOpen(true);
+          fetch(`https://apiesteban.000webhostapp.com/ucol_api/locales/listar_id.php?id_local=${this.id_tienda_actual}`)
+            .then(response => response.json())
+            .then(local => {
+              this.nombre_tienda = local[0].Nombre;
+              this.foto_tienda = local[0].Url_imagen;
+              this.llenarUsuarios(this.id_tienda_actual);
+              this.llenarProductos(this.id_tienda_actual);
+              this.llenarVentas(this.id_tienda_actual);
+              this.setOpen(true);
+            })
+
         } else {
           alert("No se encontró el usuario");
         }

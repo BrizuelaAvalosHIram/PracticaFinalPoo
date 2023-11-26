@@ -12,7 +12,7 @@
 
     <ion-card-content>
       <ion-item>
-        <ion-input type="text" [(ngModel)]="usuario" placeholder="Nombre de usuario">
+        <ion-input type="text" [(ngModel)]="usuario" placeholder="Correo">
         </ion-input>
       </ion-item>
 
@@ -23,9 +23,6 @@
 
       <ion-button expand="block" color="tertiary" (click)="login()">Iniciar sesión</ion-button>
       <ion-button expand="block" color="tertiary" id="open-modal-agregar">registrate</ion-button>
-      <div style="text-align: center;">
-        Tiendas registradas {{usuarios.length}}
-      </div>
     </ion-card-content>
 
   </ion-card>
@@ -83,9 +80,9 @@
           <ion-row>
 
             <ion-avatar>
-              <img alt="Usuario" src="{{elemento.fotografia}}" />
+              <img alt="Usuario" src="{{foto_tienda}}" />
             </ion-avatar>
-            <h1 style="padding: 5px;color:white;">{{elemento.tienda}}</h1>
+            <h1 style="padding: 5px;color:white;">{{nombre_tienda}}</h1>
 
           </ion-row>
         </div>
