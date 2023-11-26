@@ -222,6 +222,9 @@ export class HomePage {
   {
     this.ClientesModal=true;
   }
+  CerrarReportesModal() {
+    this.ReportesModal = false;
+  }
   productosModal()
   {
     this.ProductosModal=true;
@@ -247,17 +250,35 @@ export class HomePage {
     this.carrito = [];
     this.total = 0;
     for(let i=0;i<this.productos.length;i++){
-      if(this.productos[i].selected===true){
-        this.total += parseInt(this.productos[i].pedido)
-        this.carrito.push(this.productos[i])
+      if (this.productos[i].selected === true) {
+        if (this.productos[i].pedido <= this.productos[i].Disponibles) {
+          this.total += parseInt(this.productos[i].pedido) * this.productos[i].Precio
+          this.carrito.push(this.productos[i])
+        } else {
+          alert(`Solo hay ${this.productos[i].Disponibles} disponibles de ${this.productos[i].Nombre}`);
+        }
       }
     }
+    this.carritoClientes.forEach(cliente => {
+      fetch(`https://apiesteban.000webhostapp.com/ucol_api/pedidos/crear.php?id_cliente=${cliente.id}&id_local=${this.id_tienda_actual}&total=${this.total}`)
+        .then(response => response.json())
+        .then(data => {
+          this.carrito.forEach(producto => {
+            fetch(`https://apiesteban.000webhostapp.com/ucol_api/pedidos/crear_detalles.php?id_pedido=${data}&id_producto=${producto.id}&cantidad=${producto.pedido}`)
+              .then(response => response.json())
+              .then(data => {
+                this.SeleccionarProductosModal = false;
+                this.SeleccionarClientesModal = false;
+              })
+          })
+        })
+    })
 
-    this.venta = { id: this.id_venta, cliente: JSON.stringify(this.carritoClientes), productos: JSON.stringify(this.carrito), total: this.total }
-    this.SeleccionarProductosModal = false;
-    this.SeleccionarClientesModal = false;
-    this.ventas.push(this.venta);
-    localStorage.setItem("ventasLocal", JSON.stringify(this.ventas))
+
+
+    //this.venta = { id: this.id_venta, cliente: JSON.stringify(this.carritoClientes), productos: JSON.stringify(this.carrito), total: this.total }
+    //this.ventas.push(this.venta);
+    //localStorage.setItem("ventasLocal", JSON.stringify(this.ventas))
   }
 
   SeleccionarCliente() {

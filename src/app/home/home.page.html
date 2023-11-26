@@ -240,7 +240,7 @@
         <div style="padding: 5px;">
           <ion-row>
 
-            <ion-button mode="ios" color="medium" (click)="cerrarClientes()">
+            <ion-button mode="ios" color="medium" (click)="cerrarReportesModal()">
               <ion-icon name="chevron-back-outline"></ion-icon>
             </ion-button>
             <ion-avatar>
@@ -342,16 +342,15 @@
 
         <ion-row>
           <ion-card color="light" *ngFor="let cliente of clientes;" (click)="toggleSelection(cliente)">
-            <img src="{{cliente.fotografia}}" alt="fotografia">
-            <ion-card-title>{{cliente.nombre}}</ion-card-title>
-            <ion-card-subtitle>{{cliente.domicilio}}</ion-card-subtitle>
+            <img style="width: 120px; height: 120px;" src="{{cliente.Fotografia}}" alt="fotografia">
+            <ion-card-title>{{cliente.Nombre}}</ion-card-title>
+            <ion-card-subtitle>{{cliente.Domicilio}}</ion-card-subtitle>
             <ion-card-content>
-              <p><b>Correo </b>{{cliente.correo}}</p>
-              <p><b>Teléfono </b>{{cliente.telefono}}</p>
-              <p><b>Correo </b>{{cliente.correo}}</p>
-              <p><b>El periodo para cobrar es </b>{{cliente.periodocobrar}}</p>
-              <p><b>El día </b>{{cliente.diacobrar}}</p>
-              <p><b>A la hora </b>{{cliente.horacobrar}}</p>
+              <p><b>Correo </b>{{cliente.Correo}}</p>
+              <p><b>Teléfono </b>{{cliente.Telefono}}</p>
+              <p><b>El periodo para cobrar es </b>{{cliente.Cuando_cobrar}}</p>
+              <p><b>El día </b>{{cliente.Dia}}</p>
+              <p><b>A la hora </b>{{cliente.Hora}}</p>
               <p>{{cliente.id}}</p>
             </ion-card-content>
             <ion-icon *ngIf="cliente.selected" name="checkmark-circle" color="primary"></ion-icon>
