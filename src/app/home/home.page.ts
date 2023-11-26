@@ -12,6 +12,7 @@ export class HomePage {
   modal!: IonModal;
   usuarios: any = [];
   tiendas: any = [];
+  id_tienda_actual: string = "";
   clientes: any[] = [{
       nombre:"Esteban",
       domicilio:"Plutarco Elias Calles",
@@ -125,7 +126,6 @@ export class HomePage {
   eproducto = this.producto;
 
   constructor() {
-    this.llenarUsuarios();
     this.llenarProductos();
     //this.llenarCatalogoTiendas();
     /*
@@ -150,12 +150,12 @@ export class HomePage {
   }
 
 
-  llenarUsuarios() {
-    fetch("https://apiesteban.000webhostapp.com/ucol_api/usuarios/listar.php")
+  llenarUsuarios(id_local: string) {
+    console.log(id_local)
+    fetch(`https://apiesteban.000webhostapp.com/ucol_api/clientes/listar.php?id_local=${id_local}`)
       .then(response => response.json())
       .then(data => {
         console.log(data);
-        this.usuarios = data;
         this.clientes = data;
       })
   }
@@ -360,10 +360,10 @@ export class HomePage {
     fetch(url)
       .then(response => response.json())
       .then(data => {
-        console.log(this.usuario)
-        console.log(this.contrasena)
         if (data.length>0) {
           console.log(data)
+          this.id_tienda_actual = data[0].id_local;
+          this.llenarUsuarios(this.id_tienda_actual);
           this.setOpen(true);
         } else {
           alert("No se encontró el usuario");

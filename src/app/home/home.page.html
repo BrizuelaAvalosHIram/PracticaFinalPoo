@@ -215,15 +215,15 @@
 
         <ion-row>
           <ion-card color="light" *ngFor="let cliente of clientes;" (click)="editarCliente(cliente)">
-            <img src="{{cliente.Url_imagen}}" alt="fotografia">
+            <img style="width: 120px; height: 120px;" src="{{cliente.Fotografia}}" alt="fotografia">
             <ion-card-title>{{cliente.Nombre}}</ion-card-title>
             <ion-card-subtitle>{{cliente.Domicilio}}</ion-card-subtitle>
             <ion-card-content>
               <p><b>Teléfono </b>{{cliente.Telefono}}</p>
               <p><b>Correo </b>{{cliente.Correo}}</p>
-              <p><b>El periodo para cobrar es </b>{{cliente.Periodocobrar}}</p>
-              <p><b>El día </b>{{cliente.Diacobrar}}</p>
-              <p><b>A la hora </b>{{cliente.Horacobrar}}</p>
+              <p><b>El periodo para cobrar es </b>{{cliente.Cuando_cobrar}}</p>
+              <p><b>El día </b>{{cliente.Dia}}</p>
+              <p><b>A la hora </b>{{cliente.Hora}}</p>
               <p>{{cliente.id}}</p>
             </ion-card-content>
           </ion-card>
