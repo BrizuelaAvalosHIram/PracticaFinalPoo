@@ -247,7 +247,7 @@
               <img alt="Usuario"
                 src="https://images.vexels.com/media/users/3/205237/isolated/preview/ed7b0a564fc695b0b91c4ac1276c661d-icono-de-trazo-de-servicio-al-cliente.png" />
             </ion-avatar>
-            <h1 style="padding: 5px;color:white;">Reportes</h1>
+            <h1 style="padding: 5px;color:white;">Reporte de un periodo dado</h1>
           </ion-row>
         </div>
       </ion-header>
@@ -260,12 +260,21 @@
         </ion-fab>
 
         <ion-row>
+          <ion-card>
+            <ion-card-content>
+              <label>Fecha inicio: </label><input type="date">
+              <br>
+              <label>Fecha final: </label><input type="date">
+            </ion-card-content>
+            <ion-button color="success" (click)="guardarusuario()">Obtener</ion-button>
+          </ion-card>
           <ion-card color="light" *ngFor="let venta of ventas;">
             <ion-card-content>
-              <p><b>Id </b>{{venta.id}}</p>
-              <p><b>Clientes </b>{{venta.cliente}}</p>
-              <p><b>Productos </b>{{venta.productos}}</p>
-              <p><b>Total </b>{{venta.total}}</p>
+              <p>Id {{venta.id_venta}}</p>
+              <p>Cliente: {{venta.cliente}}</p>
+              <p>Producto: {{venta.producto}}</p>
+              <p>Cantidad: {{venta.cantidad}}</p>
+              <p><b>Total: ${{venta.total}} MXN</b></p>
             </ion-card-content>
           </ion-card>
 
@@ -280,7 +289,7 @@
         <div style="padding: 5px;">
           <ion-row>
 
-            <ion-button mode="ios" color="medium" (click)="cerrarClientes()">
+            <ion-button mode="ios" color="medium" (click)="cerrarSeleccionarProductos()">
               <ion-icon name="chevron-back-outline"></ion-icon>
             </ion-button>
             <ion-avatar>
@@ -310,7 +319,8 @@
             </ion-card-content>
             <ion-icon *ngIf="producto.selected" name="checkmark-circle" color="primary"></ion-icon>
           </ion-card>
-
+          <label>Fecha de la venta: </label>
+          <input [(ngModel)]="fecha_venta" type="date">
         </ion-row>
       </ion-content>
     </ng-template>

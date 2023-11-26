@@ -37,6 +37,7 @@ export class HomePage {
   carrito: any[] = [];
   carritoClientes: any[] = [];
   ventas: any[] = [];
+  fecha_venta: string = "";
   id_venta = 0;
   filteredCliente: any[] = [];
   filteredProducto:any[] = [];
@@ -251,6 +252,10 @@ export class HomePage {
   {
     this.SeleccionarClientesModal=false;
   }
+  cerrarSeleccionarProductos()
+  {
+    this.SeleccionarProductosModal=false;
+  }
   cerrarProductos()
   {
     this.ProductosModal=false;
@@ -300,7 +305,7 @@ export class HomePage {
       }
     }
     this.carritoClientes.forEach(cliente => {
-      fetch(`https://apiesteban.000webhostapp.com/ucol_api/pedidos/crear.php?id_cliente=${cliente.id}&id_local=${this.id_tienda_actual}&total=${this.total}`)
+      fetch(`https://apiesteban.000webhostapp.com/ucol_api/pedidos/crear.php?id_cliente=${cliente.id}&id_local=${this.id_tienda_actual}&total=${this.total}&fecha=${this.fecha_venta}`)
         .then(response => response.json())
         .then(data => {
           this.carrito.forEach(producto => {
@@ -313,12 +318,7 @@ export class HomePage {
           })
         })
     })
-
-
-
-    //this.venta = { id: this.id_venta, cliente: JSON.stringify(this.carritoClientes), productos: JSON.stringify(this.carrito), total: this.total }
-    //this.ventas.push(this.venta);
-    //localStorage.setItem("ventasLocal", JSON.stringify(this.ventas))
+    this.llenarVentas(this.id_tienda_actual)
   }
 
   SeleccionarCliente() {
