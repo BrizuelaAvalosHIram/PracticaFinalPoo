@@ -195,6 +195,46 @@ export class HomePage {
       })
   }
 
+  llenarVentas(id_local: String) {
+    fetch(`https://apiesteban.000webhostapp.com/ucol_api/pedidos/listar_todos.php?id_local=${id_local}`)
+      .then(response => response.json())
+      .then(pedidos => {
+        console.log("pedidos")
+        console.log(pedidos)
+        pedidos.forEach((pedido:any) => {
+          fetch(`https://apiesteban.000webhostapp.com/ucol_api/clientes/listar_id.php?id=${pedido.id_cliente}`)
+            .then(response => response.json())
+            .then(cliente => {
+              console.log("cliente")
+              console.log(cliente)
+              fetch(`https://apiesteban.000webhostapp.com/ucol_api/pedidos/listar_pedido_detalles.php?id=${pedido.id}`)
+                .then(response => response.json())
+                .then(pedido_detalle => {
+                  console.log("pedido_detalle")
+                  console.log(pedido_detalle)
+                  fetch(`https://apiesteban.000webhostapp.com/ucol_api/productos/listar_producto_id.php?id=${pedido_detalle[0].id_producto}`)
+                    .then(response => response.json())
+                    .then(producto => {
+                      console.log("producto")
+                      console.log(producto[0].Nombre)
+                      console.log(cliente[0].Nombre)
+                      let detalle_venta = {
+                        id_venta: pedido.id,
+                        cliente: cliente[0].Nombre,
+                        producto: producto[0].Nombre,
+                        precio: producto[0].Precio,
+                        cantidad: pedido_detalle[0].cantidad,
+                        total: pedido.Total
+                      }
+                      this.ventas.push(detalle_venta)
+                      console.log(this.ventas)
+                    })
+                })
+            })
+        });
+      })
+  }
+
   toggleSelection(item: any) {
     item.selected = !item.selected;
   }
@@ -222,7 +262,7 @@ export class HomePage {
   {
     this.ClientesModal=true;
   }
-  CerrarReportesModal() {
+  cerrarReportesModal() {
     this.ReportesModal = false;
   }
   productosModal()
@@ -400,7 +440,6 @@ export class HomePage {
 
   login() {
     const url = `https://apiesteban.000webhostapp.com/ucol_api/login.php?credencial=${this.usuario}&pass=${this.contrasena}`;
-    console.log(url);
     fetch(url)
       .then(response => response.json())
       .then(data => {
@@ -409,6 +448,7 @@ export class HomePage {
           this.id_tienda_actual = data[0].id_local;
           this.llenarUsuarios(this.id_tienda_actual);
           this.llenarProductos(this.id_tienda_actual);
+          this.llenarVentas(this.id_tienda_actual);
           this.setOpen(true);
         } else {
           alert("No se encontró el usuario");
