@@ -38,6 +38,8 @@ export class HomePage {
   carritoClientes: any[] = [];
   ventas: any[] = [];
   fecha_venta: string = "";
+  fecha_inicio: string = "";
+  fecha_final: string = "";
   id_venta = 0;
   filteredCliente: any[] = [];
   filteredProducto:any[] = [];
@@ -198,6 +200,47 @@ export class HomePage {
 
   llenarVentas(id_local: String) {
     fetch(`https://apiesteban.000webhostapp.com/ucol_api/pedidos/listar_todos.php?id_local=${id_local}`)
+      .then(response => response.json())
+      .then(pedidos => {
+        console.log("pedidos")
+        console.log(pedidos)
+        pedidos.forEach((pedido:any) => {
+          fetch(`https://apiesteban.000webhostapp.com/ucol_api/clientes/listar_id.php?id=${pedido.id_cliente}`)
+            .then(response => response.json())
+            .then(cliente => {
+              console.log("cliente")
+              console.log(cliente)
+              fetch(`https://apiesteban.000webhostapp.com/ucol_api/pedidos/listar_pedido_detalles.php?id=${pedido.id}`)
+                .then(response => response.json())
+                .then(pedido_detalle => {
+                  console.log("pedido_detalle")
+                  console.log(pedido_detalle)
+                  fetch(`https://apiesteban.000webhostapp.com/ucol_api/productos/listar_producto_id.php?id=${pedido_detalle[0].id_producto}`)
+                    .then(response => response.json())
+                    .then(producto => {
+                      console.log("producto")
+                      console.log(producto[0].Nombre)
+                      console.log(cliente[0].Nombre)
+                      let detalle_venta = {
+                        id_venta: pedido.id,
+                        cliente: cliente[0].Nombre,
+                        producto: producto[0].Nombre,
+                        precio: producto[0].Precio,
+                        cantidad: pedido_detalle[0].cantidad,
+                        total: pedido.Total
+                      }
+                      this.ventas.push(detalle_venta)
+                      console.log(this.ventas)
+                    })
+                })
+            })
+        });
+      })
+  }
+
+  obtenerReporte() {
+    this.ventas = [];
+    fetch(`https://apiesteban.000webhostapp.com/ucol_api/pedidos/listar_fecha.php?id_local=${this.id_tienda_actual}&fecha_inicio=${this.fecha_inicio}&fecha_final=${this.fecha_final}`)
       .then(response => response.json())
       .then(pedidos => {
         console.log("pedidos")

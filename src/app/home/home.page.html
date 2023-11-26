@@ -262,11 +262,11 @@
         <ion-row>
           <ion-card>
             <ion-card-content>
-              <label>Fecha inicio: </label><input type="date">
+              <label>Fecha inicio: </label><input [(ngModel)]="fecha_inicio" type="date">
               <br>
-              <label>Fecha final: </label><input type="date">
+              <label>Fecha final: </label><input [(ngModel)]="fecha_final" type="date">
             </ion-card-content>
-            <ion-button color="success" (click)="guardarusuario()">Obtener</ion-button>
+            <ion-button color="success" (click)="obtenerReporte()">Obtener</ion-button>
           </ion-card>
           <ion-card color="light" *ngFor="let venta of ventas;">
             <ion-card-content>
