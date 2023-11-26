@@ -137,10 +137,16 @@ export class HomePage {
     Hora: "",
     Fotografia: ""
   }
-  eproducto = this.producto;
+  eproducto = {
+    Nombre: "",
+    Descripcion: "",
+    Dispomibles: "",
+    Precio: "",
+    Url_imagen: "",
+    id: 0
+  }
 
   constructor() {
-    this.llenarProductos();
     //this.llenarCatalogoTiendas();
     /*
     this.usuarios.push({
@@ -154,8 +160,8 @@ export class HomePage {
     */
   }
 
-  llenarProductos() {
-    fetch("https://apiesteban.000webhostapp.com/ucol_api/productos/listar.php")
+  llenarProductos(id_local: any) {
+    fetch(`https://apiesteban.000webhostapp.com/ucol_api/productos/listar_id.php?id_local=${id_local}`)
       .then(response => response.json())
       .then(data => {
         data.forEach((producto: any) => {
@@ -298,9 +304,12 @@ export class HomePage {
       })
   }
   eliminarProducto(id:number){
-    const index = this.productos.findIndex(item => item.id === id);
-    this.productos.splice(index, 1);
-    this.editarProductosModal=false;
+    fetch(`https://apiesteban.000webhostapp.com/ucol_api/productos/eliminar.php?id=${id}`)
+      .then(response => response.json())
+      .then(data => {
+        this.llenarProductos(this.id_tienda_actual);
+        this.editarProductosModal=false;
+      })
   }
   actualizarCliente(eregistro: any){
     fetch(`https://apiesteban.000webhostapp.com/ucol_api/clientes/editar.php?id_local=${this.id_tienda_actual}&nombre=${this.cliente_nombre}&domicilio=${this.cliente_domicilio}&correo=${this.cliente_correo}&telefono=${this.cliente_telefono}&fotografia=${this.cliente_fotografia}&cuando_cobrar=${this.cliente_cuando_cobrar}&dia=${this.cliente_dia}&hora=${this.cliente_hora}&id=${eregistro.id}`)
@@ -319,15 +328,18 @@ export class HomePage {
         this.llenarUsuarios(this.id_tienda_actual);
       })
   }
-  actualizarProducto(ecliente:any){
-    for(let i=0;i<this.productos.length;i++){
-      if(this.productos[i].id==ecliente.id)
-      {
-        this.productos[i]=ecliente;
-        break;
-      }
-    }
-    this.editarProductosModal=false;
+  actualizarProducto(eproducto:any){
+    fetch(`https://apiesteban.000webhostapp.com/ucol_api/productos/editar.php?nombre=${this.producto_nombre}&descripcion=${this.producto_descripcion}&disponibles=${this.producto_disponibles}&precio=${this.producto_precio}&fotografia=${this.producto_url}&id=${eproducto.id}`)
+      .then(response => response.json())
+      .then(data => {
+        this.producto_nombre = ""
+        this.producto_descripcion = ""
+        this.producto_precio = ""
+        this.producto_disponibles = ""
+        this.producto_url = ""
+        this.llenarProductos(this.id_tienda_actual)
+        this.editarProductosModal=false;
+      })
   }
 
   editarCliente(cliente:any){
@@ -343,7 +355,12 @@ export class HomePage {
         this.editarClientesModal=true;
   }
   editarProducto(producto: any) {
-    this.eproducto=producto;
+    this.eproducto = producto;
+    this.producto_nombre = producto.Nombre
+    this.producto_descripcion = producto.Descripcion
+    this.producto_precio = producto.Precio
+    this.producto_disponibles = producto.Disponibles
+    this.producto_url = producto.Url_imagen
     this.editarProductosModal=true;
   }
   CancelarAgregarClientesModal(){
@@ -370,6 +387,7 @@ export class HomePage {
           console.log(data)
           this.id_tienda_actual = data[0].id_local;
           this.llenarUsuarios(this.id_tienda_actual);
+          this.llenarProductos(this.id_tienda_actual);
           this.setOpen(true);
         } else {
           alert("No se encontró el usuario");
@@ -399,10 +417,10 @@ export class HomePage {
   }
 
   guardarProducto() {
-    fetch(`https://apiesteban.000webhostapp.com/ucol_api/productos/crear.php?nombre=${this.producto_nombre}&descripcion=${this.producto_descripcion}&disponibles=${this.producto_disponibles}&precio=${this.producto_precio}&url_imagen=${this.producto_url}`)
+    fetch(`https://apiesteban.000webhostapp.com/ucol_api/productos/crear.php?nombre=${this.producto_nombre}&descripcion=${this.producto_descripcion}&disponibles=${this.producto_disponibles}&precio=${this.producto_precio}&url_imagen=${this.producto_url}&id_local=${this.id_tienda_actual}`)
       .then(response => response.json())
       .then(data => {
-        this.llenarProductos();
+        this.llenarProductos(this.id_tienda_actual);
         this.agregarProductosModal = false;
       });
   }

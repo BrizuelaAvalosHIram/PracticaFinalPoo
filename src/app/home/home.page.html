@@ -540,23 +540,28 @@
       <ion-content>
         <ion-list>
           <ion-item>
-            <ion-input label="Nombre" [(ngModel)]="eproducto.nombre" labelPlacement="stacked" [clearInput]="true"
-              placeholder="Teclea el nombre del cliente" value="">
+            <ion-input label="Nombre" [(ngModel)]="producto_nombre" labelPlacement="stacked" [clearInput]="true"
+              placeholder="Teclea el nombre del cliente" value="producto_nombre">
             </ion-input>
           </ion-item>
           <ion-item>
-            <ion-textarea label="Fotografía" [(ngModel)]="eproducto.fotografia" labelPlacement="stacked"
+            <ion-input label="Nombre" [(ngModel)]="producto_descripcion" labelPlacement="stacked" [clearInput]="true"
+              placeholder="Descripcion del producto" value="">
+            </ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-textarea label="Fotografía" [(ngModel)]="producto_url" labelPlacement="stacked"
               placeholder="Teclea la URL de la fotografía del cliente" value="">
             </ion-textarea>
           </ion-item>
           <ion-item>
-            <ion-input label="Cantidad" [(ngModel)]="eproducto.cantidad" labelPlacement="stacked" [clearInput]="true"
-              placeholder="En que hora se encuentra para cobrarle" value="">
+            <ion-input label="Cantidad" [(ngModel)]="producto_disponibles" labelPlacement="stacked" [clearInput]="true"
+              placeholder="Cantidad disponible" value="">
             </ion-input>
           </ion-item>
           <ion-item>
-            <ion-input label="Precio" [(ngModel)]="eproducto.precio" labelPlacement="stacked" [clearInput]="true"
-              placeholder="En que hora se encuentra para cobrarle" value="">
+            <ion-input label="Precio" [(ngModel)]="producto_precio" labelPlacement="stacked" [clearInput]="true"
+              placeholder="Precio del producto" value="">
             </ion-input>
           </ion-item>
         </ion-list>
